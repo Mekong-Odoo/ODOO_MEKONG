@@ -1,0 +1,9 @@
+__manifest__.py : Chứa các cặp key-value
+
+RUN
+Câu lệnh để run: python odoo-bin -c odoo.conf / File odoo-bin rồi run / python odoo-bin
+=> Xem log thì vào file: odoo.log
+=> http://localhost:8069 ; http://MyTien2003.local.domain:8069
+=> Ctr + C: Tắt
+
+=> Kiểm tra cách dùng bằng điện thoại (Môi trường dev)
