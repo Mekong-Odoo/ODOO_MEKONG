@@ -1,0 +1,40 @@
+<odoo>
+    <template id="homepage_template">
+        <div class="o_homepage">
+            <h1>🏠 Welcome to Odoo</h1>
+            <div class="o_homepage_icons">
+
+                <!-- Manufacturing -->
+                <a href="/web#action=mrp.action_mrp_production&amp;view_type=form" class="o_homepage_icon">
+                    <img src="/web/image/model_mrp.production/icon" alt="Manufacturing"/>
+                    <p>Manufacturing</p>
+                </a>
+
+                <!-- Inventory -->
+                <a href="/web#action=stock.action_picking_tree_all&amp;view_type=form" class="o_homepage_icon">
+                    <img src="/web/image/model_stock.picking/icon" alt="Inventory"/>
+                    <p>Inventory</p>
+                </a>
+
+                <!-- Sales -->
+                <a href="/web#action=sale.action_quotations&amp;view_type=form" class="o_homepage_icon">
+                    <img src="/web/image/model_sale.order/icon" alt="Sales"/>
+                    <p>Sales</p>
+                </a>
+
+                <!-- Purchase -->
+                <a href="/web#action=purchase.action_purchase_order&amp;view_type=form" class="o_homepage_icon">
+                    <img src="/web/image/model_purchase.order/icon" alt="Purchase"/>
+                    <p>Purchase</p>
+                </a>
+
+                <!-- Accounting -->
+                <a href="/web#action=account.action_move_line_form&amp;view_type=form" class="o_homepage_icon">
+                    <img src="/web/image/model_account.move/icon" alt="Accounting"/>
+                    <p>Accounting</p>
+                </a>
+
+            </div>
+        </div>
+    </template>
+</odoo>

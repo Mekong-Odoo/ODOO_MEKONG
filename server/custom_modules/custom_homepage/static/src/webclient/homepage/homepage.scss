@@ -1,0 +1,24 @@
+/* custom_homepage/static/src/webclient/homepage/homepage.scss */
+.o_homepage {
+    text-align: center;
+    padding: 20px;
+}
+
+.o_homepage_icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.o_homepage_icon {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.o_homepage_icon img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}

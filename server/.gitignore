@@ -49,3 +49,8 @@ package.json
 /man/
 /share/
 /src/
+
+
+# Ẩn đi file Text
+/TEXT.txt
+TEXT.txt
