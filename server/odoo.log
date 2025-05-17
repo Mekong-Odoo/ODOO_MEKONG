@@ -26167,3 +26167,27 @@ psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 
 2025-05-17 02:29:00,192 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.004s 
 2025-05-17 02:29:00,198 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
 2025-05-17 02:29:00,206 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-17 03:00:00,684 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Sales: Send pending emails' (31) starting 
+2025-05-17 03:00:00,703 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Sales: Send pending emails' (31) done in 0.019s 
+2025-05-17 03:00:00,708 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Sales: Send pending emails' (31) processed 0 records, 0 records remaining 
+2025-05-17 03:00:00,714 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Sales: Send pending emails' (31) completed 
+2025-05-17 03:02:00,764 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) starting 
+2025-05-17 03:02:00,774 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) done in 0.009s 
+2025-05-17 03:02:00,780 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) processed 0 records, 0 records remaining 
+2025-05-17 03:02:00,785 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) completed 
+2025-05-17 03:02:00,796 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) starting 
+2025-05-17 03:02:00,809 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) done in 0.013s 
+2025-05-17 03:02:00,814 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) processed 0 records, 0 records remaining 
+2025-05-17 03:02:00,820 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) completed 
+2025-05-17 03:03:00,845 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-17 03:03:00,853 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.009s 
+2025-05-17 03:03:00,857 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-17 03:03:00,862 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-17 03:03:00,870 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-17 03:03:00,878 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.008s 
+2025-05-17 03:03:00,882 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-17 03:03:00,890 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-17 03:03:00,905 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-17 03:03:00,910 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.005s 
+2025-05-17 03:03:00,915 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-17 03:03:00,922 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
