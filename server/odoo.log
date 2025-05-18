@@ -26191,3 +26191,140 @@ psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 
 2025-05-17 03:03:00,910 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.005s 
 2025-05-17 03:03:00,915 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
 2025-05-17 03:03:00,922 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-17 03:46:40,486 4876 INFO Odoo odoo.addons.base.models.res_device: User 2 inserts device log (0fJ50Eg68pLAAczp1ZWPAYfoaov7a2kKuusZYGS3Uk) 
+2025-05-17 03:46:40,502 4876 INFO Odoo werkzeug: 192.168.3.109 - - [17/May/2025 03:46:40] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 2 0.002 0.033
+2025-05-17 03:53:33,712 4876 INFO Odoo odoo.addons.base.models.res_device: User 2 inserts device log (TYHQnACPRSXSlNg5sU6HhWAh0vqWbPyu8uicdzUC5U) 
+2025-05-17 03:53:41,566 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:41] "GET /odoo HTTP/1.1" 200 - 96 0.206 7.657
+2025-05-17 03:53:43,169 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:43] "GET /bus/websocket_worker_bundle?v=18.0-3 HTTP/1.1" 304 - 3 0.005 0.036
+2025-05-17 03:53:43,916 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:43] "POST /mail/data HTTP/1.1" 200 - 40 0.225 0.106
+2025-05-17 03:53:43,934 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:43] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 1 0.006 0.234
+2025-05-17 03:53:43,948 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:43] "GET /web/manifest.webmanifest HTTP/1.1" 200 - 9 0.031 0.316
+2025-05-17 03:53:44,009 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:44] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 9 0.083 0.311
+2025-05-17 03:53:45,222 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:45] "POST /web/action/load HTTP/1.1" 200 - 7 0.017 1.621
+2025-05-17 03:53:45,601 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:45] "POST /mail/data HTTP/1.1" 200 - 65 0.154 0.094
+2025-05-17 03:53:46,332 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:46] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.001 0.113
+2025-05-17 03:53:46,554 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 03:53:46] "POST /mail/inbox/messages HTTP/1.1" 200 - 40 0.060 0.666
+2025-05-17 04:02:01,647 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) starting 
+2025-05-17 04:02:01,660 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) done in 0.012s 
+2025-05-17 04:02:01,664 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) processed 0 records, 0 records remaining 
+2025-05-17 04:02:01,669 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) completed 
+2025-05-17 04:02:01,679 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) starting 
+2025-05-17 04:02:01,687 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) done in 0.008s 
+2025-05-17 04:02:01,690 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) processed 0 records, 0 records remaining 
+2025-05-17 04:02:01,694 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) completed 
+2025-05-17 04:03:01,720 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-17 04:03:01,730 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.010s 
+2025-05-17 04:03:01,735 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-17 04:03:01,740 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-17 04:03:01,754 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-17 04:03:01,764 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.010s 
+2025-05-17 04:03:01,769 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-17 04:03:01,775 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-17 04:03:01,791 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-17 04:03:01,797 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.006s 
+2025-05-17 04:03:01,801 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-17 04:03:01,807 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-17 04:25:30,321 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) starting 
+2025-05-17 04:25:30,416 4876 INFO Odoo odoo.addons.base.models.ir_attachment: filestore gc 0 checked, 0 removed 
+2025-05-17 04:25:30,447 4876 INFO Odoo odoo.models.unlink: User #1 deleted ir.cron.progress records with IDs: [823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897, 898] 
+2025-05-17 04:25:30,576 4876 INFO Odoo odoo.addons.base.models.res_users: GC'd 0 user log entries 
+2025-05-17 04:25:30,599 4876 INFO Odoo odoo.addons.base.models.res_users: GC 'res.users.apikeys' delete 0 entries 
+2025-05-17 04:25:30,612 4876 INFO Odoo odoo.addons.base.models.res_device: GC device logs delete 8 entries 
+2025-05-17 04:25:30,615 4876 INFO Odoo odoo.addons.base.models.res_device: GC device logs delete 0 entries 
+2025-05-17 04:25:30,660 4876 INFO Odoo odoo.addons.base.models.res_users: GC 'auth_totp.device' delete 0 entries 
+2025-05-17 04:25:30,685 4876 INFO Odoo odoo.models.unlink: User #1 deleted bus.bus records with IDs: [776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799] 
+2025-05-17 04:25:31,107 4876 INFO Odoo odoo.models.unlink: User #1 deleted ir.attachment records with IDs: [1386] 
+2025-05-17 04:25:31,384 4876 INFO Odoo odoo.addons.sms.models.sms_sms: GC'd 0 sms marked for deletion 
+2025-05-17 04:25:32,099 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) done in 1.776s 
+2025-05-17 04:25:32,103 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) processed 0 records, 0 records remaining 
+2025-05-17 04:25:32,110 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) completed 
+2025-05-17 04:25:32,120 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) starting 
+2025-05-17 04:25:32,129 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) done in 0.010s 
+2025-05-17 04:25:32,131 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) processed 0 records, 0 records remaining 
+2025-05-17 04:25:32,138 4876 INFO Odoo odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) completed 
+2025-05-17 04:50:31,838 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:31] "GET / HTTP/1.1" 303 - 1 0.008 0.179
+2025-05-17 04:50:32,092 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:32] "GET /odoo HTTP/1.1" 200 - 19 0.043 0.188
+2025-05-17 04:50:33,671 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:33] "GET /bus/websocket_worker_bundle?v=18.0-3 HTTP/1.1" 304 - 3 0.009 0.017
+2025-05-17 04:50:34,472 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:34] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 1 0.006 0.272
+2025-05-17 04:50:34,511 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:34] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 9 0.028 0.362
+2025-05-17 04:50:34,576 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:34] "POST /web/action/load HTTP/1.1" 200 - 6 0.153 0.353
+2025-05-17 04:50:34,577 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:34] "GET /web/manifest.webmanifest HTTP/1.1" 200 - 7 0.028 0.022
+2025-05-17 04:50:34,856 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:34] "POST /mail/data HTTP/1.1" 200 - 40 0.347 0.437
+2025-05-17 04:50:35,133 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:35] "POST /mail/data HTTP/1.1" 200 - 59 0.063 0.086
+2025-05-17 04:50:35,762 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:35] "POST /mail/inbox/messages HTTP/1.1" 200 - 34 0.048 0.163
+2025-05-17 04:50:37,135 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:37] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.001 0.005
+2025-05-17 04:50:58,792 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:58] "GET /odoo/discuss HTTP/1.1" 200 - 19 0.020 0.059
+2025-05-17 04:50:59,297 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:59] "GET /bus/websocket_worker_bundle?v=18.0-3 HTTP/1.1" 304 - 3 0.005 0.016
+2025-05-17 04:50:59,311 4876 INFO Odoo odoo.addons.base.models.res_device: User 2 inserts device log (0fJ50Eg68pLAAczp1ZWPAYfoaov7a2kKuusZYGS3Uk) 
+2025-05-17 04:50:59,530 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:59] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 9 0.014 0.034
+2025-05-17 04:50:59,920 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:59] "POST /web/action/load HTTP/1.1" 200 - 7 0.068 0.042
+2025-05-17 04:50:59,948 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:59] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 1 0.005 0.052
+2025-05-17 04:50:59,957 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:50:59] "GET /web/manifest.webmanifest HTTP/1.1" 200 - 7 0.076 0.055
+2025-05-17 04:51:00,015 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:00] "POST /mail/data HTTP/1.1" 200 - 40 0.104 0.089
+2025-05-17 04:51:00,535 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:00] "POST /mail/data HTTP/1.1" 200 - 59 0.064 0.088
+2025-05-17 04:51:00,822 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:00] "POST /mail/inbox/messages HTTP/1.1" 200 - 34 0.048 0.124
+2025-05-17 04:51:01,821 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:01] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.001 0.004
+2025-05-17 04:51:02,877 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:02] "GET / HTTP/1.1" 303 - 1 0.002 0.005
+2025-05-17 04:51:02,942 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:02] "GET /odoo HTTP/1.1" 200 - 19 0.017 0.041
+2025-05-17 04:51:03,470 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:03] "GET /bus/websocket_worker_bundle?v=18.0-3 HTTP/1.1" 304 - 3 0.015 0.126
+2025-05-17 04:51:03,795 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:03] "POST /web/action/load HTTP/1.1" 200 - 6 0.017 0.019
+2025-05-17 04:51:03,810 4876 INFO Odoo odoo.addons.base.models.res_device: User 2 inserts device log (0fJ50Eg68pLAAczp1ZWPAYfoaov7a2kKuusZYGS3Uk) 
+2025-05-17 04:51:03,965 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:03] "GET /web/manifest.webmanifest HTTP/1.1" 200 - 7 0.045 0.146
+2025-05-17 04:51:04,039 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:04] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 9 0.118 0.139
+2025-05-17 04:51:04,040 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:04] "POST /mail/data HTTP/1.1" 200 - 40 0.111 0.168
+2025-05-17 04:51:04,048 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:04] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 1 0.005 0.212
+2025-05-17 04:51:04,389 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:04] "POST /mail/data HTTP/1.1" 200 - 59 0.071 0.114
+2025-05-17 04:51:05,045 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:05] "POST /mail/inbox/messages HTTP/1.1" 200 - 34 0.045 0.213
+2025-05-17 04:51:05,788 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:05] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.002 0.005
+2025-05-17 04:51:13,013 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "GET /odoo/discuss HTTP/1.1" 200 - 19 0.022 0.053
+2025-05-17 04:51:13,410 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "GET /bus/websocket_worker_bundle?v=18.0-3 HTTP/1.1" 304 - 3 0.005 0.015
+2025-05-17 04:51:13,486 4876 INFO Odoo odoo.addons.base.models.res_device: User 2 inserts device log (0fJ50Eg68pLAAczp1ZWPAYfoaov7a2kKuusZYGS3Uk) 
+2025-05-17 04:51:13,696 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 9 0.013 0.132
+2025-05-17 04:51:13,933 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "POST /web/action/load HTTP/1.1" 200 - 7 0.029 0.024
+2025-05-17 04:51:13,961 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "GET /web/manifest.webmanifest HTTP/1.1" 200 - 7 0.022 0.042
+2025-05-17 04:51:13,987 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:13] "GET /websocket?version=18.0-3 HTTP/1.1" 101 - 1 0.002 0.025
+2025-05-17 04:51:14,067 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:14] "POST /mail/data HTTP/1.1" 200 - 40 0.089 0.095
+2025-05-17 04:51:14,519 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:14] "POST /mail/data HTTP/1.1" 200 - 59 0.047 0.116
+2025-05-17 04:51:15,100 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:15] "POST /mail/inbox/messages HTTP/1.1" 200 - 34 0.035 0.133
+2025-05-17 04:51:15,915 4876 INFO Odoo werkzeug: 127.0.0.1 - - [17/May/2025 04:51:15] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.001 0.004
+2025-05-17 04:52:13,087 4876 INFO ? odoo.service.server: Initiating shutdown 
+2025-05-17 04:52:13,088 4876 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2025-05-17 04:52:13,253 4876 ERROR Odoo odoo.sql_db: bad query: b' UPDATE "bus_presence"\n                    SET "status" = "__tmp"."status"::VARCHAR\n                    FROM (VALUES (4, \'offline\')) AS "__tmp"("id", "status")\n                    WHERE "bus_presence"."id" = "__tmp"."id"\n                '
+ERROR: could not serialize access due to concurrent update
+ 
+2025-05-17 04:52:13,316 4876 ERROR Odoo odoo.addons.bus.websocket: could not serialize access due to concurrent update
+ 
+Traceback (most recent call last):
+  File "I:\OdooMain\server\odoo\addons\bus\websocket.py", line 318, in get_messages
+    message = self._process_next_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "I:\OdooMain\server\odoo\addons\bus\websocket.py", line 464, in _process_next_message
+    self._handle_control_frame(frame)
+  File "I:\OdooMain\server\odoo\addons\bus\websocket.py", line 602, in _handle_control_frame
+    self._terminate()
+  File "I:\OdooMain\server\odoo\addons\bus\websocket.py", line 583, in _terminate
+    with acquire_cursor(self._db) as cr:
+  File "I:\OdooMain\server\odoo\sql_db.py", line 201, in __exit__
+    self.commit()
+  File "I:\OdooMain\server\odoo\sql_db.py", line 479, in commit
+    self.flush()
+  File "I:\OdooMain\server\odoo\sql_db.py", line 159, in flush
+    self.transaction.flush()
+  File "I:\OdooMain\server\odoo\api.py", line 1022, in flush
+    env_to_flush.flush_all()
+  File "I:\OdooMain\server\odoo\api.py", line 849, in flush_all
+    self[model_name].flush_model()
+  File "I:\OdooMain\server\odoo\models.py", line 6752, in flush_model
+    self._flush(fnames)
+  File "I:\OdooMain\server\odoo\models.py", line 6830, in _flush
+    model.browse(some_ids)._write_multi(vals_list)
+  File "I:\OdooMain\server\odoo\models.py", line 4916, in _write_multi
+    self.env.execute_query(SQL(
+  File "I:\OdooMain\server\odoo\api.py", line 978, in execute_query
+    self.cr.execute(query)
+  File "I:\OdooMain\server\odoo\sql_db.py", line 354, in execute
+    res = self._obj.execute(query, params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.SerializationFailure: could not serialize access due to concurrent update
+
+2025-05-17 04:52:13,430 4876 INFO ? odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 7 connections  
