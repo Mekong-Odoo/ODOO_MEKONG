@@ -1,4 +1,4 @@
-version: '3.8'
+#version: '3.8'
 
 services:
   # Odoo Service
@@ -11,7 +11,7 @@ services:
       - "8069:8069"
       - "8072:8072"
     volumes:
-      - odoo_data:/var/lib/odoo
+      - ./odoo_data:/var/lib/odoo
       - ./custom_modules:/mnt/custom_modules
       - ./logs:/var/log/odoo
       - ./geoip:/usr/share/geoip
@@ -28,6 +28,7 @@ services:
     restart: unless-stopped # Thay đổi từ always để tránh restart liên tục khi có lỗi
     networks:
       - odoo_network
+    user: odoo:odoo
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8069/web/database/selector" ]
       interval: 30s

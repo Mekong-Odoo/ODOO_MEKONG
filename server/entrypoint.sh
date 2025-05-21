@@ -45,11 +45,16 @@ fi
 
 echo "🔧 Sử dụng binary Odoo: $ODOO_CMD"
 
+# Danh sách các module cần thiết
+CORE_MODULES="base,mail,web,base_setup,bus,discuss"
+
 # Tạo thư mục nếu là root
 if [ "$(id -u)" = "0" ]; then
     echo "🔧 Đang chạy dưới quyền root, tạo thư mục..."
-    mkdir -p /var/run/odoo /var/log/odoo /var/lib/odoo/sessions
+    mkdir -p /var/run/odoo /var/log/odoo /var/lib/odoo
+    mkdir -p /var/lib/odoo/filestore/${DB_NAME}
     chown -R odoo:odoo /var/run/odoo /var/log/odoo /var/lib/odoo
+    chmod -R 775 /var/lib/odoo
 else
     echo "⚠️ Không có quyền root, bỏ qua tạo thư mục..."
 fi
@@ -57,7 +62,7 @@ fi
 # Tạo file cấu hình từ template
 echo "🔧 Tạo file cấu hình..."
 envsubst < /etc/odoo/odoo.conf.template > /etc/odoo/odoo.conf
-chmod 640 /etc/odoo/odoo.conf
+chmod 644 /etc/odoo/odoo.conf
 chown odoo:odoo /etc/odoo/odoo.conf
 echo "✅ File cấu hình:"
 cat /etc/odoo/odoo.conf
@@ -88,14 +93,32 @@ if [ $counter -lt $max_retries ]; then
         if PGPASSWORD=${DB_PASSWORD} psql -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER} -d ${DB_NAME} \
             -c "SELECT 1 FROM pg_tables WHERE tablename = 'ir_module_module';" | grep -q 1; then
             echo "✅ Bảng ir_module_module tồn tại."
+
+            # Kiểm tra module mail đã được cài đặt chưa
+            echo "🔍 Kiểm tra cài đặt module mail..."
+            MAIL_INSTALLED=$(PGPASSWORD=${DB_PASSWORD} psql -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER} -d ${DB_NAME} -t \
+                -c "SELECT state FROM ir_module_module WHERE name='mail';")
+
+            if [ "$MAIL_INSTALLED" == "installed" ]; then
+                echo "✅ Module mail đã được cài đặt."
+            else
+                echo "⚠️ Module mail chưa được cài đặt hoặc không hoạt động."
+                echo "⚙️ Cài đặt các module core..."
+
+                if [ "$(id -u)" = "0" ]; then
+                    gosu odoo $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
+                else
+                    $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
+                fi
+            fi
         else
             echo "⚠️ Database chưa có bảng ir_module_module."
-            echo "⚙️ Chạy lệnh khởi tạo base module..."
+            echo "⚙️ Chạy lệnh khởi tạo với các module core..."
 
             if [ "$(id -u)" = "0" ]; then
-                gosu odoo $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i base --stop-after-init
+                gosu odoo $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
             else
-                $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i base --stop-after-init
+                $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
             fi
         fi
     else
@@ -103,7 +126,28 @@ if [ $counter -lt $max_retries ]; then
         PGPASSWORD=${DB_PASSWORD} psql -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER} -d postgres -c \
             "CREATE DATABASE \"${DB_NAME}\" OWNER \"${DB_USER}\";"
         echo "✅ Đã tạo database ${DB_NAME}."
+        echo "⚙️ Khởi tạo database với các module core..."
+
+        if [ "$(id -u)" = "0" ]; then
+            gosu odoo $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
+        else
+            $ODOO_CMD -c /etc/odoo/odoo.conf -d ${DB_NAME} -i ${CORE_MODULES} --stop-after-init
+        fi
     fi
+fi
+
+# Kiểm tra và sửa quyền thư mục filestore
+echo "🔍 Kiểm tra quyền thư mục filestore..."
+if [ -d "/var/lib/odoo/filestore/${DB_NAME}" ]; then
+    echo "✅ Thư mục filestore cho ${DB_NAME} đã tồn tại."
+    echo "🔧 Cập nhật quyền thư mục..."
+    chown -R odoo:odoo /var/lib/odoo/filestore/${DB_NAME}
+    chmod -R 775 /var/lib/odoo/filestore/${DB_NAME}
+else
+    echo "⚠️ Thư mục filestore cho ${DB_NAME} chưa tồn tại. Đang tạo..."
+    mkdir -p /var/lib/odoo/filestore/${DB_NAME}
+    chown -R odoo:odoo /var/lib/odoo/filestore/${DB_NAME}
+    chmod -R 775 /var/lib/odoo/filestore/${DB_NAME}
 fi
 
 # Chạy Odoo hoặc lệnh được truyền vào container
