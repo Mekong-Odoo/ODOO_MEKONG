@@ -94,6 +94,10 @@ RUN chown -R odoo:odoo /mnt/custom_modules \
     && chown -R odoo:odoo /var/run/odoo \
     && chmod -R 775 /var/lib/odoo
 
+# Copy file sửa lỗi tham chiếu
+COPY fix_file_references.py /usr/local/bin/
+RUN chmod +x /usr/local/bin/fix_file_references.py
+
 # Copy cấu hình template và entrypoint
 COPY odoo.conf.template /etc/odoo/odoo.conf.template
 COPY entrypoint.sh /entrypoint.sh

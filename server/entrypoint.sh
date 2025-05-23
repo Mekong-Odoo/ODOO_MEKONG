@@ -150,6 +150,30 @@ else
     chmod -R 775 /var/lib/odoo/filestore/${DB_NAME}
 fi
 
+# Thêm mới: Kiểm tra và tạo thư mục cụ thể đang bị lỗi
+echo "🔍 Kiểm tra thư mục cấu trúc 1d..."
+mkdir -p /var/lib/odoo/filestore/${DB_NAME}/1d
+chown -R odoo:odoo /var/lib/odoo/filestore/${DB_NAME}/1d
+chmod -R 775 /var/lib/odoo/filestore/${DB_NAME}/1d
+
+# Thêm mới: Sửa chữa quyền filestore triệt để
+echo "🔧 Sửa chữa quyền filestore triệt để..."
+find /var/lib/odoo -type d -exec chmod 775 {} \;
+find /var/lib/odoo -type f -exec chmod 664 {} \;
+
+# Thêm mới: Chạy script sửa lỗi tham chiếu file
+echo "🔧 Chạy script sửa lỗi tham chiếu file..."
+if [ -f "/usr/local/bin/fix_file_references.py" ]; then
+    export FILESTORE_PATH=/var/lib/odoo/filestore
+    if [ "$(id -u)" = "0" ]; then
+        gosu odoo python3 /usr/local/bin/fix_file_references.py
+    else
+        python3 /usr/local/bin/fix_file_references.py
+    fi
+else
+    echo "⚠️ Không tìm thấy script sửa lỗi tham chiếu file."
+fi
+
 # Chạy Odoo hoặc lệnh được truyền vào container
 echo "🚀 Khởi động Odoo hoặc lệnh được truyền vào..."
 if [ "$(id -u)" = "0" ]; then
