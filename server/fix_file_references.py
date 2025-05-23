@@ -5,7 +5,7 @@ import os
 import sys
 import psycopg2
 import logging
-from pathlib import Path
+from datetime import datetime
 
 # Cấu hình logging
 logging.basicConfig(
@@ -13,16 +13,36 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[logging.StreamHandler()]
 )
-logger = logging.getLogger("FileStoreFixer")
+logger = logging.getLogger("FilestoreChecker")
 
 
-def fix_file_references(db_host, db_port, db_user, db_password, db_name, filestore_path):
+def check_filestore_consistency(db_host, db_port, db_user, db_password, db_name, filestore_path):
     """
-    Sửa lỗi tham chiếu đến file không tồn tại trong filestore
+    Kiểm tra tính nhất quán của filestore và database
     """
-    logger.info(f"Đang kết nối tới database {db_name}...")
+    logger.info(f"Kiểm tra filestore consistency cho database: {db_name}")
 
-    # Kết nối đến database
+    # Kiểm tra thư mục filestore
+    db_filestore_path = os.path.join(filestore_path, db_name)
+    if not os.path.exists(db_filestore_path):
+        logger.warning(f"Thư mục filestore không tồn tại: {db_filestore_path}")
+        return False
+
+    # Thống kê file trong filestore
+    file_count = 0
+    total_size = 0
+    for root, dirs, files in os.walk(db_filestore_path):
+        file_count += len(files)
+        for file in files:
+            file_path = os.path.join(root, file)
+            try:
+                total_size += os.path.getsize(file_path)
+            except:
+                pass
+
+    logger.info(f"Filestore stats: {file_count} files, {total_size / 1024 / 1024:.2f} MB")
+
+    # Kết nối database để kiểm tra
     try:
         conn = psycopg2.connect(
             host=db_host,
@@ -31,80 +51,64 @@ def fix_file_references(db_host, db_port, db_user, db_password, db_name, filesto
             password=db_password,
             dbname=db_name
         )
-        conn.autocommit = False
         cursor = conn.cursor()
-        logger.info("Kết nối database thành công!")
-    except Exception as e:
-        logger.error(f"Không thể kết nối tới database: {e}")
-        return False
 
-    try:
-        # Kiểm tra bảng ir_attachment có tồn tại không
-        cursor.execute("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'ir_attachment')")
-        if not cursor.fetchone()[0]:
-            logger.warning("Bảng ir_attachment không tồn tại, có thể database chưa được khởi tạo đúng cách")
-            conn.close()
-            return False
-
-        # Lấy tất cả các tham chiếu đến file trong filestore
-        logger.info("Lấy danh sách tất cả các file attachments...")
+        # Đếm attachment records
         cursor.execute("""
-            SELECT id, store_fname 
+            SELECT 
+                COUNT(*) as total_attachments,
+                COUNT(store_fname) as file_attachments,
+                COUNT(*) - COUNT(store_fname) as db_attachments
+            FROM ir_attachment
+        """)
+        stats = cursor.fetchone()
+        logger.info(f"Database stats: {stats[0]} total attachments, {stats[1]} file-based, {stats[2]} db-stored")
+
+        # Kiểm tra file bị thiếu
+        cursor.execute("""
+            SELECT store_fname 
             FROM ir_attachment 
             WHERE store_fname IS NOT NULL
         """)
-        attachments = cursor.fetchall()
-        logger.info(f"Tìm thấy {len(attachments)} attachments có tham chiếu file")
-
-        # Kiểm tra từng file và sửa lỗi
-        fixed_count = 0
-        for att_id, store_fname in attachments:
-            full_path = os.path.join(filestore_path, db_name, store_fname)
+        missing_count = 0
+        for (store_fname,) in cursor.fetchall():
+            full_path = os.path.join(db_filestore_path, store_fname)
             if not os.path.exists(full_path):
-                logger.warning(f"File không tồn tại: {full_path} (ID: {att_id})")
+                missing_count += 1
+                if missing_count <= 5:  # Chỉ log 5 file đầu tiên
+                    logger.warning(f"Missing file: {store_fname}")
 
-                # Tạo thư mục nếu cần
-                directory = os.path.dirname(full_path)
-                if not os.path.exists(directory):
-                    logger.info(f"Tạo thư mục: {directory}")
-                    os.makedirs(directory, exist_ok=True)
+        if missing_count > 5:
+            logger.warning(f"... và {missing_count - 5} file khác bị thiếu")
 
-                # Tùy chọn 1: Tạo file trống
-                # open(full_path, 'wb').close()
-                # logger.info(f"Đã tạo file trống: {full_path}")
+        logger.info(f"Kết quả: {missing_count} file bị thiếu trong filestore")
 
-                # Tùy chọn 2: Set store_fname về NULL (sẽ làm mất tham chiếu file)
-                cursor.execute("""
-                    UPDATE ir_attachment
-                    SET store_fname = NULL, db_datas = NULL
-                    WHERE id = %s
-                """, (att_id,))
-                logger.info(f"Đã reset attachment ID {att_id} (xóa tham chiếu đến file)")
-                fixed_count += 1
+        # Tạo file timestamp để track lần kiểm tra cuối
+        timestamp_file = os.path.join(db_filestore_path, '.last_check')
+        with open(timestamp_file, 'w') as f:
+            f.write(datetime.now().isoformat())
 
-        # Commit các thay đổi
-        conn.commit()
-        logger.info(f"Đã sửa {fixed_count} attachment records")
-
-        # Kiểm tra cụ thể file bị lỗi
-        check_file = '1d/1d2e3399968f850385bfc0f16fca94d05d78e482'
-        cursor.execute("""
-            SELECT id, name FROM ir_attachment 
-            WHERE store_fname = %s
-        """, (check_file,))
-        results = cursor.fetchall()
-        if results:
-            logger.info(f"Tìm thấy {len(results)} attachment trỏ đến file lỗi {check_file}:")
-            for att_id, att_name in results:
-                logger.info(f"  - ID: {att_id}, Name: {att_name}")
-
-        return True
-    except Exception as e:
-        logger.error(f"Lỗi khi sửa tham chiếu file: {e}")
-        conn.rollback()
-        return False
-    finally:
         conn.close()
+        return missing_count == 0
+
+    except Exception as e:
+        logger.error(f"Lỗi khi kiểm tra database: {e}")
+        return False
+
+
+def create_startup_check_script():
+    """
+    Tạo script để chạy mỗi khi container khởi động
+    """
+    startup_script = """#!/bin/bash
+# Chạy kiểm tra filestore mỗi khi container khởi động
+echo "=== Kiểm tra Filestore Consistency ===" 
+python3 /opt/filestore_checker.py
+
+# Tiếp tục khởi động Odoo bình thường
+exec "$@"
+"""
+    return startup_script
 
 
 if __name__ == "__main__":
@@ -116,12 +120,11 @@ if __name__ == "__main__":
     db_name = os.environ.get('DB_NAME', 'odoo')
     filestore_path = os.environ.get('FILESTORE_PATH', '/var/lib/odoo/filestore')
 
-    logger.info(f"Bắt đầu sửa lỗi file references cho database: {db_name}")
-    success = fix_file_references(db_host, db_port, db_user, db_password, db_name, filestore_path)
+    is_consistent = check_filestore_consistency(db_host, db_port, db_user, db_password, db_name, filestore_path)
 
-    if success:
-        logger.info("Quá trình sửa lỗi hoàn tất thành công")
+    if is_consistent:
+        logger.info("✅ Filestore nhất quán với database")
         sys.exit(0)
     else:
-        logger.error("Quá trình sửa lỗi không thành công")
+        logger.warning("⚠️ Có vấn đề với filestore consistency")
         sys.exit(1)

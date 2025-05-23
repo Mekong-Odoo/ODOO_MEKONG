@@ -1,4 +1,3 @@
-# No use
 FROM odoo:18.0
 
 USER root
@@ -82,11 +81,11 @@ RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
 RUN mkdir -p /mnt/custom_modules \
     && mkdir -p /usr/share/geoip \
     && mkdir -p /var/lib/odoo/sessions \
-    && mkdir -p /var/lib/odoo/sessions/filestore \
+    && mkdir -p /var/lib/odoo/filestore \
     && mkdir -p /var/log/odoo \
     && mkdir -p /var/run/odoo
 
-# Thiết lập quyền truy cập cho user odoo
+# Thiết lập quyền truy cập cho user odoo (root -> user odoo)
 RUN chown -R odoo:odoo /mnt/custom_modules \
     && chown -R odoo:odoo /usr/share/geoip \
     && chown -R odoo:odoo /var/lib/odoo \
@@ -105,7 +104,7 @@ COPY entrypoint.sh /entrypoint.sh
 # Gán quyền thực thi
 RUN chmod +x /entrypoint.sh
 
-# Cổng expose
+# Cổng expose (8069: Giao diện web chính của Odoo/ 8072: Cổng longpolling (thông báo thời gian thực, chat...))
 EXPOSE 8069 8072
 
 # Dùng entrypoint thay cho mặc định
