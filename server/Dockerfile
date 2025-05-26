@@ -31,51 +31,41 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 # Cài đặt thư viện Python cần thiết một cách an toàn không gỡ cài đặt gói hệ thống
-RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
-    geoip2 \
-    num2words \
-    python-ldap \
-    psycopg2-binary \
-    werkzeug \
-    pydot \
-    pyparsing \
-    greenlet \
-    gevent \
-    xlrd \
-    xlwt \
-    passlib \
-    pillow \
-    polib \
-    lxml \
-    reportlab \
-    qrcode \
-    vobject \
-    python-dateutil \
-    Babel>=2.9.1 \
-    chardet>=5.0.0 \
-    decorator>=5.1.1 \
-    docutils>=0.14 \
-    gevent>=22.10.2 \
-    greenlet>=2.0.0 \
-    idna>=3.4 \
-    Jinja2>=3.0.0 \
-    lxml>=4.9.1 \
-    MarkupSafe>=2.0.0 \
-    ofxparse>=0.21 \
-    Pillow>=9.3.0 \
-    psutil>=5.9.4 \
-    pydot>=1.4.2 \
-    pyserial>=3.5 \
-    python-stdnum>=1.17 \
-    pytz>=2022.6 \
-    qrcode>=7.3.1 \
-    reportlab>=3.6.11 \
-    requests>=2.28.1 \
-    urllib3>=1.26.12 \
-    vobject>=0.9.6.1 \
-    Werkzeug>=2.0.0 \
-    XlsxWriter>=3.0.3 \
-    zeep>=4.2.1
+RUN pip3 install --no-cache-dir --break-system-packages \
+    "Babel>=2.9.1" \
+    "chardet>=5.0.0" \
+    "decorator>=5.1.1" \
+    "docutils>=0.14" \
+    "gevent>=22.10.2" \
+    "greenlet>=2.0.0" \
+    "idna>=3.4" \
+    "Jinja2>=3.0.0" \
+    "lxml>=4.9.1" \
+    "MarkupSafe>=2.0.0" \
+    "ofxparse>=0.21" \
+    "Pillow>=9.3.0" \
+    "psutil>=5.9.4" \
+    "pydot>=1.4.2" \
+    "pyserial>=3.5" \
+    "python-stdnum>=1.17" \
+    "pytz>=2022.6" \
+    "qrcode>=7.3.1" \
+    "reportlab>=3.6.11" \
+    "requests>=2.28.1" \
+    "urllib3>=1.26.12" \
+    "vobject>=0.9.6.1" \
+    "XlsxWriter>=3.0.3" \
+    "zeep>=4.2.1"
+
+# Gỡ Werkzeug hiện tại và cài đặt phiên bản tương thích
+RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed werkzeug==2.0.3
+
+# Cài đặt thêm các thư viện hỗ trợ HTTP server
+RUN pip3 install --no-cache-dir --break-system-packages \
+    "gunicorn>=20.1.0" \
+    "eventlet>=0.33.3"
+
+
 
 # Tạo các thư mục cần thiết
 RUN mkdir -p /mnt/custom_modules \

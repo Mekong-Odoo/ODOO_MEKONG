@@ -1,5 +1,5 @@
-2025-05-23 06:08:27,543 - FilestoreChecker - INFO - Kiểm tra filestore consistency cho database: Mekong
-2025-05-23 06:08:28,620 - FilestoreChecker - INFO - Filestore stats: 97 files, 17.88 MB
-2025-05-23 06:08:29,009 - FilestoreChecker - INFO - Database stats: 294 total attachments, 263 file-based, 31 db-stored
-2025-05-23 06:08:29,968 - FilestoreChecker - INFO - Kết quả: 0 file bị thiếu trong filestore
-2025-05-23 06:08:29,973 - FilestoreChecker - INFO - ✅ Filestore nhất quán với database
+2025-05-26 03:43:58,778 - FilestoreChecker - INFO - Kiểm tra filestore consistency cho database: Mekong
+2025-05-26 03:44:00,801 - FilestoreChecker - INFO - Filestore stats: 89 files, 10.72 MB
+2025-05-26 03:44:01,211 - FilestoreChecker - INFO - Database stats: 294 total attachments, 263 file-based, 31 db-stored
+2025-05-26 03:44:02,677 - FilestoreChecker - INFO - Kết quả: 0 file bị thiếu trong filestore
+2025-05-26 03:44:02,692 - FilestoreChecker - INFO - ✅ Filestore nhất quán với database

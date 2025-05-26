@@ -52,5 +52,13 @@ package.json
 
 
 # Ẩn đi file Text
+# Ẩn đi cụ thể (trong thư mục gốc)
 /TEXT.txt
+# Ẩn mọi file có tên như bên dưới
 TEXT.txt
+
+# Ẩn đi file pem AWS
+# Ẩn đi cụ thể (trong thư mục gốc)
+key-perm.pem
+# Ẩn mọi file có tên như bên dưới
+/key-perm.pem
