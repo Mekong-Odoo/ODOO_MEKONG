@@ -15997,3 +15997,493 @@ for more details.
 2025-05-27 04:24:36,015 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:24:36] "GET /web/database/selector HTTP/1.1" 200 - 5 0.317 0.761
 2025-05-27 04:25:09,829 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:25:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.303 0.728
 2025-05-27 04:25:43,798 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:25:43] "GET /web/database/selector HTTP/1.1" 200 - 5 0.362 0.839
+2025-05-27 04:26:17,682 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:26:17] "GET /web/database/selector HTTP/1.1" 200 - 5 0.322 0.792
+2025-05-27 04:26:51,771 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:26:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.312 0.983
+2025-05-27 04:27:25,798 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:27:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.393 0.857
+2025-05-27 04:27:59,748 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:27:59] "GET /web/database/selector HTTP/1.1" 200 - 5 0.359 0.799
+2025-05-27 04:28:34,207 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:28:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.388 1.293
+2025-05-27 04:29:08,274 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:29:08] "GET /web/database/selector HTTP/1.1" 200 - 5 0.398 0.871
+2025-05-27 04:29:42,342 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:29:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.387 0.909
+2025-05-27 04:30:16,463 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:30:16] "GET /web/database/selector HTTP/1.1" 200 - 5 0.383 0.941
+2025-05-27 04:30:50,719 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:30:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 1.078
+2025-05-27 04:31:24,888 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:31:24] "GET /web/database/selector HTTP/1.1" 200 - 5 0.418 0.957
+2025-05-27 04:31:35,607 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Procurement: run scheduler' (23) starting 
+2025-05-27 04:31:36,322 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-27 04:31:36,489 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.165s 
+2025-05-27 04:31:36,742 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-27 04:31:36,923 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-27 04:31:37,082 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Procurement: run scheduler' (23) done in 1.473s 
+2025-05-27 04:31:37,415 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Procurement: run scheduler' (23) processed 3 records, 0 records remaining 
+2025-05-27 04:31:37,598 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Procurement: run scheduler' (23) completed 
+2025-05-27 04:31:58,909 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:31:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.329 0.856
+2025-05-27 04:32:32,901 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:32:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.344 0.873
+2025-05-27 04:32:43,335 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-27 04:32:43,588 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.252s 
+2025-05-27 04:32:43,855 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-27 04:32:44,032 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-27 04:32:44,669 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-27 04:32:44,881 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.210s 
+2025-05-27 04:32:45,133 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-27 04:32:45,313 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-27 04:33:06,894 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:33:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.357 0.846
+2025-05-27 04:33:41,633 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:33:41] "GET /web/database/selector HTTP/1.1" 200 - 5 0.394 1.563
+2025-05-27 04:34:18,456 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:34:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.394 3.630
+2025-05-27 04:34:52,344 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:34:52] "GET /web/database/selector HTTP/1.1" 200 - 5 0.323 0.781
+2025-05-27 04:35:26,350 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:35:26] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.861
+2025-05-27 04:36:00,202 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:36:00] "GET /web/database/selector HTTP/1.1" 200 - 5 0.310 0.742
+2025-05-27 04:36:34,114 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:36:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.336 0.798
+2025-05-27 04:37:07,965 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:37:07] "GET /web/database/selector HTTP/1.1" 200 - 5 0.311 0.749
+2025-05-27 04:37:42,034 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:37:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.391 0.898
+2025-05-27 04:38:16,122 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:38:16] "GET /web/database/selector HTTP/1.1" 200 - 5 0.359 0.858
+2025-05-27 04:38:50,238 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:38:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.978
+2025-05-27 04:39:24,333 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:39:24] "GET /web/database/selector HTTP/1.1" 200 - 5 0.388 0.925
+2025-05-27 04:39:58,339 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:39:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.348 0.877
+2025-05-27 04:40:32,439 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:40:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.400 0.927
+2025-05-27 04:41:06,576 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:41:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.390 0.972
+2025-05-27 04:41:40,766 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:41:40] "GET /web/database/selector HTTP/1.1" 200 - 5 0.398 1.008
+2025-05-27 04:42:14,870 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:42:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.389 0.894
+2025-05-27 04:42:48,919 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:42:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.881
+2025-05-27 04:43:23,056 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:43:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.385 0.964
+2025-05-27 04:43:57,636 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:43:57] "GET /web/database/selector HTTP/1.1" 200 - 5 0.360 1.418
+2025-05-27 04:44:31,503 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:44:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.313 0.762
+2025-05-27 04:45:05,470 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:45:05] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.828
+2025-05-27 04:45:39,471 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:45:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.866
+2025-05-27 04:46:13,328 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:46:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.323 0.759
+2025-05-27 04:46:47,247 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:46:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.348 0.775
+2025-05-27 04:47:23,889 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:47:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.368 3.489
+2025-05-27 04:47:57,869 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:47:57] "GET /web/database/selector HTTP/1.1" 200 - 5 0.355 0.836
+2025-05-27 04:48:31,820 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:48:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.361 0.792
+2025-05-27 04:49:06,272 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:49:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.392 1.276
+2025-05-27 04:49:40,394 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:49:40] "GET /web/database/selector HTTP/1.1" 200 - 5 0.402 0.941
+2025-05-27 04:50:14,306 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:50:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.345 0.766
+2025-05-27 04:50:48,448 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:50:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.403 0.966
+2025-05-27 04:51:22,508 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:51:22] "GET /web/database/selector HTTP/1.1" 200 - 5 0.379 0.902
+2025-05-27 04:51:56,683 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:51:56] "GET /web/database/selector HTTP/1.1" 200 - 5 0.403 0.980
+2025-05-27 04:52:30,731 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:52:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.843
+2025-05-27 04:53:04,707 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:53:04] "GET /web/database/selector HTTP/1.1" 200 - 5 0.329 0.837
+2025-05-27 04:53:38,824 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:53:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.396 0.958
+2025-05-27 04:54:13,304 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:54:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 1.285
+2025-05-27 04:54:47,281 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:54:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.359 0.862
+2025-05-27 04:55:21,440 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:55:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.398 0.952
+2025-05-27 04:55:55,569 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:55:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.397 0.956
+2025-05-27 04:56:29,595 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:56:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.366 0.881
+2025-05-27 04:57:03,575 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:57:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.350 0.845
+2025-05-27 04:57:37,623 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:57:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.352 0.895
+2025-05-27 04:58:11,852 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:58:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.388 1.080
+2025-05-27 04:58:45,960 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:58:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.385 0.927
+2025-05-27 04:59:20,708 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:59:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.390 1.554
+2025-05-27 04:59:57,646 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 04:59:57] "GET /web/database/selector HTTP/1.1" 200 - 5 4.489 -0.401
+2025-05-27 05:00:31,780 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:00:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.416 0.938
+2025-05-27 05:01:05,984 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:01:05] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 0.984
+2025-05-27 05:01:40,096 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:01:40] "GET /web/database/selector HTTP/1.1" 200 - 5 0.396 0.924
+2025-05-27 05:02:14,711 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:02:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 1.448
+2025-05-27 05:02:48,766 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:02:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.389 0.910
+2025-05-27 05:03:23,481 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:03:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.374 1.544
+2025-05-27 05:03:57,458 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:03:57] "GET /web/database/selector HTTP/1.1" 200 - 5 0.347 0.831
+2025-05-27 05:04:32,114 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:04:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.396 1.480
+2025-05-27 05:05:06,125 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:05:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.339 0.854
+2025-05-27 05:05:42,143 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:05:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.483 2.211
+2025-05-27 05:06:18,289 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:06:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.476 2.219
+2025-05-27 05:06:52,792 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:06:52] "GET /web/database/selector HTTP/1.1" 200 - 5 0.436 1.208
+2025-05-27 05:07:30,078 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:07:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.511 3.153
+2025-05-27 05:08:09,461 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:08:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.493 5.417
+2025-05-27 05:08:45,997 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:08:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.458 2.111
+2025-05-27 05:09:23,344 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:09:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.478 3.169
+2025-05-27 05:10:00,000 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:10:00] "GET /web/database/selector HTTP/1.1" 200 - 5 0.425 2.541
+2025-05-27 05:10:37,058 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:10:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.465 3.007
+2025-05-27 05:11:13,479 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) starting 
+2025-05-27 05:11:14,116 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:11:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.542 2.825
+2025-05-27 05:11:14,187 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) done in 0.616s 
+2025-05-27 05:11:14,538 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) processed 0 records, 0 records remaining 
+2025-05-27 05:11:15,057 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) completed 
+2025-05-27 05:11:17,659 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) starting 
+2025-05-27 05:11:18,450 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) done in 0.707s 
+2025-05-27 05:11:18,826 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) processed 0 records, 0 records remaining 
+2025-05-27 05:11:19,247 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) completed 
+2025-05-27 05:11:51,201 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:11:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.481 3.059
+2025-05-27 05:12:30,421 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:12:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.400 5.166
+2025-05-27 05:13:07,626 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:13:07] "GET /web/database/selector HTTP/1.1" 200 - 5 0.450 2.896
+2025-05-27 05:13:44,515 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:13:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.498 2.922
+2025-05-27 05:14:21,268 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:14:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.440 2.798
+2025-05-27 05:14:57,271 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:14:57] "GET /web/database/selector HTTP/1.1" 200 - 5 0.514 1.982
+2025-05-27 05:15:34,014 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:15:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.541 2.550
+2025-05-27 05:16:09,957 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:16:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.466 2.091
+2025-05-27 05:16:45,735 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:16:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.506 1.941
+2025-05-27 05:17:25,060 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:17:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.519 5.221
+2025-05-27 05:17:58,093 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:17:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.493 2.848
+2025-05-27 05:18:39,707 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:18:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.469 3.431
+2025-05-27 05:19:16,950 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:19:16] "GET /web/database/selector HTTP/1.1" 200 - 5 0.468 3.181
+2025-05-27 05:19:54,242 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:19:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.523 3.135
+2025-05-27 05:20:31,123 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:20:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.474 2.863
+2025-05-27 05:21:09,269 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:21:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.480 3.586
+2025-05-27 05:21:48,710 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:21:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.443 5.068
+2025-05-27 05:22:26,217 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:22:26] "GET /web/database/selector HTTP/1.1" 200 - 5 0.606 3.190
+2025-05-27 05:23:03,030 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:23:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.430 2.879
+2025-05-27 05:23:42,587 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:23:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.492 3.636
+2025-05-27 05:24:18,691 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:24:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.461 2.063
+2025-05-27 05:24:55,091 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:24:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.492 2.023
+2025-05-27 05:25:31,935 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:25:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.401 2.829
+2025-05-27 05:26:13,224 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:26:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.472 3.565
+2025-05-27 05:26:50,471 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:26:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.546 3.039
+2025-05-27 05:27:26,083 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:27:26] "GET /web/database/selector HTTP/1.1" 200 - 5 0.411 1.560
+2025-05-27 05:28:01,125 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:28:01] "GET /web/database/selector HTTP/1.1" 200 - 5 0.404 1.433
+2025-05-27 05:28:37,538 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:28:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.482 2.487
+2025-05-27 05:29:15,482 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:29:15] "GET /web/database/selector HTTP/1.1" 200 - 5 0.545 3.712
+2025-05-27 05:29:51,197 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:29:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.385 1.785
+2025-05-27 05:30:31,528 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:30:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.524 6.144
+2025-05-27 05:31:06,566 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-27 05:31:06,871 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.291s 
+2025-05-27 05:31:07,224 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-27 05:31:07,543 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-27 05:31:08,856 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:31:08] "GET /web/database/selector HTTP/1.1" 200 - 5 0.503 2.986
+2025-05-27 05:31:45,125 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:31:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.508 2.630
+2025-05-27 05:32:14,358 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-27 05:32:14,709 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.338s 
+2025-05-27 05:32:15,031 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-27 05:32:15,284 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-27 05:32:22,522 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:32:22] "GET /web/database/selector HTTP/1.1" 200 - 5 0.554 2.615
+2025-05-27 05:32:55,584 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-27 05:32:56,035 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.414s 
+2025-05-27 05:32:56,430 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-27 05:32:56,789 52 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-27 05:32:58,782 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:32:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.513 2.254
+2025-05-27 05:33:34,047 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:33:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.463 1.738
+2025-05-27 05:34:10,259 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:34:10] "GET /web/database/selector HTTP/1.1" 200 - 5 0.444 2.267
+2025-05-27 05:34:46,701 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:34:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.460 2.571
+2025-05-27 05:35:26,945 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:35:26] "GET /web/database/selector HTTP/1.1" 200 - 5 -0.840 7.483
+2025-05-27 05:35:58,618 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:35:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.487 1.739
+2025-05-27 05:36:39,137 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:36:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.491 2.481
+2025-05-27 05:37:16,819 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:37:16] "GET /web/database/selector HTTP/1.1" 200 - 5 0.511 3.664
+2025-05-27 05:37:54,063 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:37:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.523 3.223
+2025-05-27 05:38:31,905 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:38:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.518 3.260
+2025-05-27 05:39:08,176 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:39:08] "GET /web/database/selector HTTP/1.1" 200 - 5 0.577 2.401
+2025-05-27 05:39:47,976 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:39:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.501 5.842
+2025-05-27 05:40:25,040 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:40:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.521 2.833
+2025-05-27 05:41:02,707 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:41:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.541 3.394
+2025-05-27 05:41:39,591 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:41:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.543 2.818
+2025-05-27 05:42:18,312 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:42:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.508 4.316
+2025-05-27 05:42:55,171 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:42:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.545 2.363
+2025-05-27 05:43:32,350 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:43:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.593 2.777
+2025-05-27 05:44:10,211 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:44:10] "GET /web/database/selector HTTP/1.1" 200 - 5 0.540 4.300
+2025-05-27 05:44:46,389 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:44:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.577 2.124
+2025-05-27 05:45:23,196 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:45:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.498 2.695
+2025-05-27 05:45:58,688 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:45:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.517 1.771
+2025-05-27 05:46:36,851 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:46:36] "GET /web/database/selector HTTP/1.1" 200 - 5 0.572 3.738
+2025-05-27 05:47:11,722 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:47:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.447 1.312
+2025-05-27 05:47:50,548 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:47:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.482 4.148
+2025-05-27 05:48:27,775 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:48:27] "GET /web/database/selector HTTP/1.1" 200 - 5 0.533 3.057
+2025-05-27 05:49:07,744 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:49:07] "GET /web/database/selector HTTP/1.1" 200 - 5 0.582 6.986
+2025-05-27 05:49:45,772 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:49:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.603 3.457
+2025-05-27 05:50:23,776 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:50:23] "GET /web/database/selector HTTP/1.1" 200 - 5 0.511 3.303
+2025-05-27 05:51:01,373 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:51:01] "GET /web/database/selector HTTP/1.1" 200 - 5 0.531 3.329
+2025-05-27 05:51:39,710 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:51:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.506 3.967
+2025-05-27 05:52:15,866 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:52:15] "GET /web/database/selector HTTP/1.1" 200 - 5 0.445 2.234
+2025-05-27 05:52:54,697 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:52:54] "GET /web/database/selector HTTP/1.1" 200 - 5 4.542 1.001
+2025-05-27 05:53:30,578 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:53:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.469 2.073
+2025-05-27 05:54:06,805 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:54:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.485 2.384
+2025-05-27 05:54:42,461 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:54:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.376 1.760
+2025-05-27 05:55:18,151 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:55:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.390 1.838
+2025-05-27 05:55:54,098 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:55:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.425 2.047
+2025-05-27 05:56:29,781 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:56:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.415 1.896
+2025-05-27 05:57:05,771 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:57:05] "GET /web/database/selector HTTP/1.1" 200 - 5 0.486 2.174
+2025-05-27 05:57:42,016 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:57:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.468 2.216
+2025-05-27 05:58:21,474 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:58:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.476 5.300
+2025-05-27 05:58:58,366 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:58:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.448 2.684
+2025-05-27 05:59:34,388 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 05:59:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.453 2.012
+2025-05-27 06:00:12,295 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:00:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.637 3.525
+2025-05-27 06:00:49,363 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:00:49] "GET /web/database/selector HTTP/1.1" 200 - 5 0.467 3.063
+2025-05-27 06:01:29,184 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:01:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.941 4.816
+2025-05-27 06:02:03,693 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:02:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.356 0.864
+2025-05-27 06:02:37,812 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:02:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.400 0.924
+2025-05-27 06:03:11,971 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:03:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.425 0.960
+2025-05-27 06:03:46,621 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:03:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.341 1.513
+2025-05-27 06:04:23,305 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:04:23] "GET /web/database/selector HTTP/1.1" 200 - 5 4.458 -0.564
+2025-05-27 06:04:57,436 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:04:57] "GET /web/database/selector HTTP/1.1" 200 - 5 0.389 0.951
+2025-05-27 06:05:31,518 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:05:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.387 0.912
+2025-05-27 06:06:05,450 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:06:05] "GET /web/database/selector HTTP/1.1" 200 - 5 0.351 0.778
+2025-05-27 06:06:39,667 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:06:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.407 1.021
+2025-05-27 06:07:13,644 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:07:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.342 0.846
+2025-05-27 06:07:47,909 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:07:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.464 0.996
+2025-05-27 06:08:21,825 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:08:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.347 0.792
+2025-05-27 06:08:56,365 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:08:56] "GET /web/database/selector HTTP/1.1" 200 - 5 0.325 1.400
+2025-05-27 06:09:30,303 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:09:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.318 0.808
+2025-05-27 06:10:04,480 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:10:04] "GET /web/database/selector HTTP/1.1" 200 - 5 0.392 0.973
+2025-05-27 06:10:38,646 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:10:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.396 0.992
+2025-05-27 06:10:43,741 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) starting 
+2025-05-27 06:10:43,938 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) done in 0.195s 
+2025-05-27 06:10:44,168 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) processed 0 records, 0 records remaining 
+2025-05-27 06:10:44,339 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) completed 
+2025-05-27 06:10:45,010 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) starting 
+2025-05-27 06:10:45,242 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) done in 0.230s 
+2025-05-27 06:10:45,485 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) processed 0 records, 0 records remaining 
+2025-05-27 06:10:45,661 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) completed 
+2025-05-27 06:11:12,853 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:11:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.355 0.872
+2025-05-27 06:11:47,197 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:11:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.342 1.222
+2025-05-27 06:12:21,250 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:12:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.878
+2025-05-27 06:12:55,352 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:12:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.381 0.921
+2025-05-27 06:13:29,426 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:13:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.361 0.907
+2025-05-27 06:14:03,912 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:14:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.336 1.356
+2025-05-27 06:14:37,900 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:14:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.347 0.844
+2025-05-27 06:15:12,152 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:15:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.461 1.005
+2025-05-27 06:15:46,127 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:15:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.363 0.811
+2025-05-27 06:16:22,811 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:16:22] "GET /web/database/selector HTTP/1.1" 200 - 5 4.459 -0.541
+2025-05-27 06:16:56,665 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:16:56] "GET /web/database/selector HTTP/1.1" 200 - 5 0.312 0.759
+2025-05-27 06:17:30,519 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:17:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.312 0.763
+2025-05-27 06:18:04,367 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:18:04] "GET /web/database/selector HTTP/1.1" 200 - 5 0.320 0.734
+2025-05-27 06:18:38,238 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:18:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.317 0.774
+2025-05-27 06:19:12,282 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:19:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.325 0.941
+2025-05-27 06:19:46,193 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:19:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.332 0.804
+2025-05-27 06:20:20,185 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:20:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.363 0.803
+2025-05-27 06:20:54,108 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:20:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.338 0.796
+2025-05-27 06:21:28,040 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:21:28] "GET /web/database/selector HTTP/1.1" 200 - 5 0.329 0.805
+2025-05-27 06:22:01,909 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:22:01] "GET /web/database/selector HTTP/1.1" 200 - 5 0.325 0.778
+2025-05-27 06:22:35,829 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:22:35] "GET /web/database/selector HTTP/1.1" 200 - 5 0.352 0.767
+2025-05-27 06:23:09,697 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:23:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.321 0.749
+2025-05-27 06:23:43,566 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:23:43] "GET /web/database/selector HTTP/1.1" 200 - 5 0.313 0.780
+2025-05-27 06:24:18,233 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:24:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.342 1.546
+2025-05-27 06:24:52,259 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:24:52] "GET /web/database/selector HTTP/1.1" 200 - 5 0.348 0.886
+2025-05-27 06:25:26,355 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:25:26] "GET /web/database/selector HTTP/1.1" 200 - 5 0.386 0.915
+2025-05-27 06:26:00,496 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:26:00] "GET /web/database/selector HTTP/1.1" 200 - 5 0.402 0.959
+2025-05-27 06:26:34,642 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:26:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.397 0.969
+2025-05-27 06:27:08,827 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:27:08] "GET /web/database/selector HTTP/1.1" 200 - 5 0.403 0.999
+2025-05-27 06:27:42,833 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:27:42] "GET /web/database/selector HTTP/1.1" 200 - 5 0.345 0.869
+2025-05-27 06:28:16,960 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:28:16] "GET /web/database/selector HTTP/1.1" 200 - 5 0.415 0.921
+2025-05-27 06:28:50,999 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:28:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.384 0.875
+2025-05-27 06:29:28,559 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:29:28] "GET /web/database/selector HTTP/1.1" 200 - 5 4.444 0.288
+2025-05-27 06:30:02,427 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:30:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.316 0.777
+2025-05-27 06:30:36,384 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:30:36] "GET /web/database/selector HTTP/1.1" 200 - 5 0.369 0.810
+2025-05-27 06:31:10,274 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:31:10] "GET /web/database/selector HTTP/1.1" 200 - 5 0.324 0.782
+2025-05-27 06:31:40,456 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-27 06:31:40,973 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.514s 
+2025-05-27 06:31:41,182 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-27 06:31:41,363 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-27 06:31:44,127 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:31:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.335 0.731
+2025-05-27 06:32:18,044 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:32:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.357 0.776
+2025-05-27 06:32:22,803 45 ERROR Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] code 400, message Bad request version ('÷Ç×Y\x9d\x11\x00*jj\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À') - - -
+2025-05-27 06:32:22,805 45 INFO Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ªèë#¿êv\x93#\x890SÝ\x1bÃ\x09Ò²\x08\x09«ñ)e\x96%Ã\x88ÕÉ\x85ø .¶k\x01*\x06B8\x18Â=Êì\x14\x9f\x91\x10Â;¹\x85\x95ºã§\x0c÷Ç×Y\x9d\x11\x00*jj\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À" 400 - - - -
+2025-05-27 06:32:22,831 45 ERROR Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] code 400, message Bad request version ('¡VØ5\x0e{z×\x14èq\x88\x01\x02\x13)aÉ[4©ë&\x96nl9~¥wf\x91\x00*ªª\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À') - - -
+2025-05-27 06:32:22,833 45 INFO Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03.Ö\x84uoÀ\x0cÓto\x16Ó¶÷{S\x17;uöõB==oX\x88\x93\x99y\x8eÿ ¡VØ5\x0e{z×\x14èq\x88\x01\x02\x13)aÉ[4©ë&\x96nl9~¥wf\x91\x00*ªª\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À" 400 - - - -
+2025-05-27 06:32:22,849 45 ERROR Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] code 400, message Bad request version ('·\x95Í»8ziÔ\x00***\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À') - - -
+2025-05-27 06:32:22,850 45 INFO Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03«S\x98\x99KÎ9\x84×\x10*rþ\x94\x9bÀ\x17Þyv\x084ø\x97z\x00m\\x\x04m¡ \x05Î$$\x9dÁxñl\x10Å{Á¬Wl\x8c$±ßB´Ý\x0b·\x95Í»8ziÔ\x00***\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À" 400 - - - -
+2025-05-27 06:32:22,867 44 ERROR Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] code 400, message Bad request version ('º\x04jÒ¥³ou¼\x95vs\x88\x10éìòñÈÈê\x0e\x84¡%IY«I\x80,\x11\x00*úú\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À') - - -
+2025-05-27 06:32:22,868 44 INFO Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:22] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03\x97qg£U\\uû\x1e:\x90÷\x0dªâÇW$Ã\x08Ñ¾êÓ\x869\x0e7\x9aè\x1a\x1b º\x04jÒ¥³ou¼\x95vs\x88\x10éìòñÈÈê\x0e\x84¡%IY«I\x80,\x11\x00*úú\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À" 400 - - - -
+2025-05-27 06:32:24,443 45 INFO Mekong werkzeug: 172.18.0.1 - - [27/May/2025 06:32:24] "GET /web/database/selector HTTP/1.1" 200 - 8 0.553 0.991
+2025-05-27 06:32:25,499 45 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/src/libs/fontawesome/css/font-awesome.css HTTP/1.1" 200 - 1 0.070 0.272
+2025-05-27 06:32:25,514 43 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/dist/css/bootstrap.css HTTP/1.1" 200 - 1 0.067 0.266
+2025-05-27 06:32:25,569 46 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/dom/event-handler.js HTTP/1.1" 200 - 1 0.070 0.274
+2025-05-27 06:32:25,570 44 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/dom/data.js HTTP/1.1" 200 - 1 0.071 0.272
+2025-05-27 06:32:25,857 45 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/dom/manipulator.js HTTP/1.1" 200 - 1 0.072 0.273
+2025-05-27 06:32:25,861 43 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/util/index.js HTTP/1.1" 200 - 1 0.067 0.263
+2025-05-27 06:32:25,927 44 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/util/config.js HTTP/1.1" 200 - 1 0.079 0.254
+2025-05-27 06:32:25,930 46 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:25] "GET /web/static/lib/bootstrap/js/dist/dom/selector-engine.js HTTP/1.1" 200 - 1 0.083 0.265
+2025-05-27 06:32:26,226 45 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/util/backdrop.js HTTP/1.1" 200 - 1 0.086 0.270
+2025-05-27 06:32:26,226 43 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/util/component-functions.js HTTP/1.1" 200 - 1 0.084 0.268
+2025-05-27 06:32:26,293 44 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/util/focustrap.js HTTP/1.1" 200 - 1 0.072 0.283
+2025-05-27 06:32:26,296 46 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/util/scrollbar.js HTTP/1.1" 200 - 1 0.076 0.277
+2025-05-27 06:32:26,566 43 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/modal.js HTTP/1.1" 200 - 1 0.072 0.254
+2025-05-27 06:32:26,566 45 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/lib/bootstrap/js/dist/base-component.js HTTP/1.1" 200 - 1 0.070 0.257
+2025-05-27 06:32:26,622 44 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:26] "GET /web/static/src/public/database_manager.js HTTP/1.1" 200 - 1 0.065 0.253
+2025-05-27 06:32:27,016 44 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:27] "GET /web/static/img/logo2.png HTTP/1.1" 200 - 1 0.081 0.272
+2025-05-27 06:32:27,627 45 INFO ? werkzeug: 172.18.0.1 - - [27/May/2025 06:32:27] "GET /web/static/img/favicon.ico HTTP/1.1" 200 - 1 0.071 0.259
+2025-05-27 06:32:47,801 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-27 06:32:47,981 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.178s 
+2025-05-27 06:32:48,235 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-27 06:32:48,408 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-27 06:32:49,047 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-27 06:32:49,231 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.182s 
+2025-05-27 06:32:49,466 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-27 06:32:49,644 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-27 06:32:51,990 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:32:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.349 0.800
+2025-05-27 06:33:25,853 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:33:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.326 0.752
+2025-05-27 06:33:59,802 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:33:59] "GET /web/database/selector HTTP/1.1" 200 - 5 0.350 0.824
+2025-05-27 06:34:33,934 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:34:33] "GET /web/database/selector HTTP/1.1" 200 - 5 0.359 0.999
+2025-05-27 06:35:07,942 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:35:07] "GET /web/database/selector HTTP/1.1" 200 - 5 0.341 0.903
+2025-05-27 06:35:41,933 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:35:41] "GET /web/database/selector HTTP/1.1" 200 - 5 0.350 0.847
+2025-05-27 06:36:15,923 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:36:15] "GET /web/database/selector HTTP/1.1" 200 - 5 0.388 0.818
+2025-05-27 06:36:50,044 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:36:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.407 0.908
+2025-05-27 06:37:24,052 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:37:24] "GET /web/database/selector HTTP/1.1" 200 - 5 0.373 0.849
+2025-05-27 06:37:58,034 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:37:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.825
+2025-05-27 06:38:31,983 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:38:31] "GET /web/database/selector HTTP/1.1" 200 - 5 0.378 0.805
+2025-05-27 06:39:05,927 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:39:05] "GET /web/database/selector HTTP/1.1" 200 - 5 0.365 0.786
+2025-05-27 06:39:40,577 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:39:40] "GET /web/database/selector HTTP/1.1" 200 - 5 0.359 1.521
+2025-05-27 06:40:14,620 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:40:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.353 0.891
+2025-05-27 06:40:48,675 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:40:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.374 0.914
+2025-05-27 06:41:22,682 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:41:22] "GET /web/database/selector HTTP/1.1" 200 - 5 0.368 0.851
+2025-05-27 06:41:56,683 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:41:56] "GET /web/database/selector HTTP/1.1" 200 - 5 0.344 0.891
+2025-05-27 06:42:33,889 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:42:33] "GET /web/database/selector HTTP/1.1" 200 - 5 4.891 -0.467
+2025-05-27 06:43:07,892 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:43:07] "GET /web/database/selector HTTP/1.1" 200 - 5 0.352 0.867
+2025-05-27 06:43:41,952 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:43:41] "GET /web/database/selector HTTP/1.1" 200 - 5 0.374 0.898
+2025-05-27 06:44:15,955 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:44:15] "GET /web/database/selector HTTP/1.1" 200 - 5 0.349 0.884
+2025-05-27 06:44:50,379 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:44:50] "GET /web/database/selector HTTP/1.1" 200 - 5 0.345 1.276
+2025-05-27 06:45:24,232 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:45:24] "GET /web/database/selector HTTP/1.1" 200 - 5 0.323 0.747
+2025-05-27 06:45:58,322 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:45:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.363 0.950
+2025-05-27 06:46:32,351 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:46:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.371 0.852
+2025-05-27 06:47:06,268 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:47:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.325 0.819
+2025-05-27 06:47:40,456 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:47:40] "GET /web/database/selector HTTP/1.1" 200 - 5 0.397 1.032
+2025-05-27 06:48:14,560 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:48:14] "GET /web/database/selector HTTP/1.1" 200 - 5 0.390 0.927
+2025-05-27 06:48:48,416 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:48:48] "GET /web/database/selector HTTP/1.1" 200 - 5 0.339 0.712
+2025-05-27 06:49:22,528 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:49:22] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.929
+2025-05-27 06:49:56,986 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:49:56] "GET /web/database/selector HTTP/1.1" 200 - 5 0.338 1.342
+2025-05-27 06:50:30,917 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:50:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.326 0.815
+2025-05-27 06:51:04,813 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:51:04] "GET /web/database/selector HTTP/1.1" 200 - 5 0.344 0.756
+2025-05-27 06:51:38,738 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:51:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.346 0.792
+2025-05-27 06:52:12,598 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:52:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.310 0.770
+2025-05-27 06:52:46,504 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:52:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.316 0.793
+2025-05-27 06:53:20,363 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:53:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.317 0.758
+2025-05-27 06:53:54,237 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:53:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.321 0.772
+2025-05-27 06:54:28,121 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:54:28] "GET /web/database/selector HTTP/1.1" 200 - 5 0.319 0.770
+2025-05-27 06:55:02,507 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:55:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.382 1.221
+2025-05-27 06:55:39,240 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:55:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.358 3.609
+2025-05-27 06:56:13,201 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:56:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.342 0.835
+2025-05-27 06:56:47,222 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:56:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.882
+2025-05-27 06:57:21,302 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:57:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.934
+2025-05-27 06:57:55,310 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:57:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.357 0.874
+2025-05-27 06:58:29,384 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:58:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.368 0.899
+2025-05-27 06:59:03,505 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:59:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.368 0.967
+2025-05-27 06:59:37,570 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 06:59:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.362 0.926
+2025-05-27 07:00:12,589 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:00:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.382 1.860
+2025-05-27 07:00:46,683 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:00:46] "GET /web/database/selector HTTP/1.1" 200 - 5 0.365 0.947
+2025-05-27 07:01:20,776 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:01:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.376 0.908
+2025-05-27 07:01:54,921 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:01:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.417 0.958
+2025-05-27 07:02:29,019 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:02:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.362 0.928
+2025-05-27 07:03:03,145 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:03:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.409 0.945
+2025-05-27 07:03:37,253 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:03:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.391 0.920
+2025-05-27 07:04:11,308 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:04:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.382 0.886
+2025-05-27 07:04:45,468 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:04:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.400 0.968
+2025-05-27 07:05:20,158 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:05:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.355 1.561
+2025-05-27 07:05:54,205 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:05:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.382 0.859
+2025-05-27 07:06:28,260 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:06:28] "GET /web/database/selector HTTP/1.1" 200 - 5 0.384 0.906
+2025-05-27 07:07:02,448 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:07:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.410 0.994
+2025-05-27 07:07:39,482 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:07:39] "GET /web/database/selector HTTP/1.1" 200 - 5 0.456 3.777
+2025-05-27 07:08:13,538 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:08:13] "GET /web/database/selector HTTP/1.1" 200 - 5 0.356 0.903
+2025-05-27 07:08:47,695 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:08:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.391 0.966
+2025-05-27 07:09:21,803 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:09:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 0.907
+2025-05-27 07:09:55,817 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:09:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.347 0.883
+2025-05-27 07:10:30,238 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:10:30] "GET /web/database/selector HTTP/1.1" 200 - 5 0.366 1.269
+2025-05-27 07:11:04,379 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:11:04] "GET /web/database/selector HTTP/1.1" 200 - 5 0.418 0.945
+2025-05-27 07:11:15,462 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) starting 
+2025-05-27 07:11:15,626 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) done in 0.159s 
+2025-05-27 07:11:15,812 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) processed 0 records, 0 records remaining 
+2025-05-27 07:11:15,984 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Notification: Notify scheduled messages' (8) completed 
+2025-05-27 07:11:16,606 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) starting 
+2025-05-27 07:11:16,797 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) done in 0.189s 
+2025-05-27 07:11:16,972 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) processed 0 records, 0 records remaining 
+2025-05-27 07:11:17,142 50 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Mail: Email Queue Manager' (3) completed 
+2025-05-27 07:11:38,339 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:11:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.354 0.823
+2025-05-27 07:12:12,589 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:12:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.501 0.961
+2025-05-27 07:12:47,142 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:12:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.663 1.118
+2025-05-27 07:13:21,106 45 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:13:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.341 0.824
+2025-05-27 07:13:55,216 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:13:55] "GET /web/database/selector HTTP/1.1" 200 - 5 0.410 0.927
+2025-05-27 07:14:29,217 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:14:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.337 0.865
+2025-05-27 07:15:03,544 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:15:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.439 1.111
+2025-05-27 07:15:38,082 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:15:38] "GET /web/database/selector HTTP/1.1" 200 - 5 0.395 1.355
+2025-05-27 07:16:12,096 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:16:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.362 0.893
+2025-05-27 07:16:45,909 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:16:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.305 0.712
+2025-05-27 07:17:19,940 44 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:17:19] "GET /web/database/selector HTTP/1.1" 200 - 5 0.371 0.893
+2025-05-27 07:17:54,316 43 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:17:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.344 1.237
+2025-05-27 07:22:22,288 1 ERROR Mekong odoo.service.server: WorkerHTTP (43) timeout after 240s 
+2025-05-27 07:22:22,306 1 ERROR Mekong odoo.service.server: WorkerHTTP (44) timeout after 240s 
+2025-05-27 07:22:22,309 1 ERROR Mekong odoo.service.server: WorkerHTTP (45) timeout after 240s 
+2025-05-27 07:22:22,327 1 ERROR Mekong odoo.service.server: WorkerCron (52) timeout after 300s 
+2025-05-27 07:22:22,329 1 ERROR Mekong odoo.service.server: WorkerHTTP (45) timeout after 240s 
+2025-05-27 07:22:22,330 1 ERROR Mekong odoo.service.server: WorkerCron (52) timeout after 300s 
+2025-05-27 07:22:22,353 2206 INFO Mekong odoo.service.server: Worker WorkerHTTP (2206) alive 
+2025-05-27 07:22:22,353 2205 INFO Mekong odoo.service.server: Worker WorkerHTTP (2205) alive 
+2025-05-27 07:22:22,356 2207 INFO Mekong odoo.service.server: Worker WorkerHTTP (2207) alive 
+2025-05-27 07:22:22,359 2208 INFO Mekong odoo.service.server: Worker WorkerCron (2208) alive 
+2025-05-27 07:22:31,566 50 ERROR ? odoo.service.server: Worker WorkerCron (50) Exception occurred, exiting... 
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/service/server.py", line 1124, in _runloop
+    self.sleep()
+  File "/usr/lib/python3/dist-packages/odoo/service/server.py", line 1197, in sleep
+    self.dbcursor._cnx.poll()
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+2025-05-27 07:22:31,586 50 INFO Mekong odoo.service.server: Worker (50) exiting. request_count: 186, registry count: 1. 
+2025-05-27 07:22:33,022 2213 INFO Mekong odoo.service.server: Worker WorkerCron (2213) alive 
+2025-05-27 07:22:37,024 2206 INFO Mekong odoo.addons.base.models.ir_http: Generating routing map for key None 
+2025-05-27 07:22:38,350 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:22:38] "GET /web/database/selector HTTP/1.1" 200 - 8 4.678 -0.257
+2025-05-27 07:23:11,082 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:23:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.323 0.772
+2025-05-27 07:23:44,944 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:23:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.334 0.747
+2025-05-27 07:24:18,827 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:24:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.338 0.739
+2025-05-27 07:24:53,535 2207 INFO Mekong odoo.addons.base.models.ir_http: Generating routing map for key None 
+2025-05-27 07:24:54,667 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:24:54] "GET /web/database/selector HTTP/1.1" 200 - 8 0.461 2.614
+2025-05-27 07:25:29,088 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:25:29] "GET /web/database/selector HTTP/1.1" 200 - 5 0.403 1.238
+2025-05-27 07:26:03,404 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:26:03] "GET /web/database/selector HTTP/1.1" 200 - 5 0.436 1.096
+2025-05-27 07:26:37,302 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:26:37] "GET /web/database/selector HTTP/1.1" 200 - 5 0.323 0.800
+2025-05-27 07:27:11,178 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:27:11] "GET /web/database/selector HTTP/1.1" 200 - 5 0.326 0.764
+2025-05-27 07:27:45,878 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:27:45] "GET /web/database/selector HTTP/1.1" 200 - 5 0.387 1.501
+2025-05-27 07:28:20,139 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:28:20] "GET /web/database/selector HTTP/1.1" 200 - 5 0.453 1.046
+2025-05-27 07:28:54,208 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:28:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.378 0.904
+2025-05-27 07:29:28,282 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:29:28] "GET /web/database/selector HTTP/1.1" 200 - 5 0.355 0.894
+2025-05-27 07:30:02,825 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:30:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.469 1.270
+2025-05-27 07:30:37,483 2205 INFO Mekong odoo.addons.base.models.ir_http: Generating routing map for key None 
+2025-05-27 07:30:38,895 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:30:38] "GET /web/database/selector HTTP/1.1" 200 - 8 0.601 2.697
+2025-05-27 07:31:03,351 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) starting 
+2025-05-27 07:31:03,633 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) done in 0.279s 
+2025-05-27 07:31:03,927 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) processed 0 records, 0 records remaining 
+2025-05-27 07:31:04,155 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Partner Autocomplete: Sync with remote DB' (13) completed 
+2025-05-27 07:31:12,931 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:31:12] "GET /web/database/selector HTTP/1.1" 200 - 5 0.345 0.894
+2025-05-27 07:31:47,372 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:31:47] "GET /web/database/selector HTTP/1.1" 200 - 5 0.537 1.134
+2025-05-27 07:32:18,653 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) starting 
+2025-05-27 07:32:19,040 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) done in 0.384s 
+2025-05-27 07:32:19,387 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) processed 0 records, 0 records remaining 
+2025-05-27 07:32:19,577 2208 INFO Mekong odoo.addons.base.models.ir_cron: Job 'SMS: SMS Queue Manager' (14) completed 
+2025-05-27 07:32:21,794 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:32:21] "GET /web/database/selector HTTP/1.1" 200 - 5 0.538 1.106
+2025-05-27 07:32:52,461 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) starting 
+2025-05-27 07:32:52,708 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) done in 0.243s 
+2025-05-27 07:32:53,006 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) processed 0 records, 0 records remaining 
+2025-05-27 07:32:53,171 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Snailmail: process letters queue' (15) completed 
+2025-05-27 07:32:58,632 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:32:58] "GET /web/database/selector HTTP/1.1" 200 - 5 0.404 3.642
+2025-05-27 07:33:32,861 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:33:32] "GET /web/database/selector HTTP/1.1" 200 - 5 0.421 1.024
+2025-05-27 07:34:06,762 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:34:06] "GET /web/database/selector HTTP/1.1" 200 - 5 0.335 0.806
+2025-05-27 07:34:41,298 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:34:41] "GET /web/database/selector HTTP/1.1" 200 - 5 0.405 1.353
+2025-05-27 07:35:17,438 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:35:17] "GET /web/database/selector HTTP/1.1" 200 - 5 1.007 2.351
+2025-05-27 07:35:51,463 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:35:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.349 0.893
+2025-05-27 07:36:25,519 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:36:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.367 0.899
+2025-05-27 07:36:59,697 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:36:59] "GET /web/database/selector HTTP/1.1" 200 - 5 0.411 1.001
+2025-05-27 07:37:33,873 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:37:33] "GET /web/database/selector HTTP/1.1" 200 - 5 0.540 0.864
+2025-05-27 07:38:10,490 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:38:10] "GET /web/database/selector HTTP/1.1" 200 - 5 0.353 3.475
+2025-05-27 07:38:44,550 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:38:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.358 0.914
+2025-05-27 07:39:18,687 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:39:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.385 0.958
+2025-05-27 07:39:52,814 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:39:52] "GET /web/database/selector HTTP/1.1" 200 - 5 0.427 0.906
+2025-05-27 07:40:26,886 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:40:26] "GET /web/database/selector HTTP/1.1" 200 - 5 0.400 0.905
+2025-05-27 07:41:01,067 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:41:01] "GET /web/database/selector HTTP/1.1" 200 - 5 0.421 0.952
+2025-05-27 07:41:35,132 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:41:35] "GET /web/database/selector HTTP/1.1" 200 - 5 0.371 0.915
+2025-05-27 07:42:09,260 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:42:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.383 0.972
+2025-05-27 07:42:44,612 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:42:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.341 0.858
+2025-05-27 07:43:20,339 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:43:20] "GET /web/database/selector HTTP/1.1" 200 - 5 3.094 1.234
+2025-05-27 07:43:54,215 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:43:54] "GET /web/database/selector HTTP/1.1" 200 - 5 0.334 0.754
+2025-05-27 07:44:28,324 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:44:28] "GET /web/database/selector HTTP/1.1" 200 - 5 0.388 0.905
+2025-05-27 07:45:02,285 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:45:02] "GET /web/database/selector HTTP/1.1" 200 - 5 0.322 0.863
+2025-05-27 07:45:36,526 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:45:36] "GET /web/database/selector HTTP/1.1" 200 - 5 0.398 1.088
+2025-05-27 07:46:10,646 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:46:10] "GET /web/database/selector HTTP/1.1" 200 - 5 0.413 0.906
+2025-05-27 07:46:44,685 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) starting 
+2025-05-27 07:46:44,891 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:46:44] "GET /web/database/selector HTTP/1.1" 200 - 5 0.486 0.977
+2025-05-27 07:46:45,989 2213 INFO Mekong odoo.addons.base.models.ir_attachment: filestore gc 0 checked, 0 removed 
+2025-05-27 07:46:47,564 2213 INFO Mekong odoo.addons.base.models.res_users: GC'd 0 user log entries 
+2025-05-27 07:46:48,133 2213 INFO Mekong odoo.addons.base.models.res_users: GC 'res.users.apikeys' delete 0 entries 
+2025-05-27 07:46:48,381 2213 INFO Mekong odoo.addons.base.models.res_device: GC device logs delete 0 entries 
+2025-05-27 07:46:48,497 2213 INFO Mekong odoo.addons.base.models.res_device: GC device logs delete 0 entries 
+2025-05-27 07:46:49,645 2213 INFO Mekong odoo.addons.base.models.res_users: GC 'auth_totp.device' delete 0 entries 
+2025-05-27 07:46:50,269 2213 INFO Mekong odoo.models.unlink: User #1 deleted bus.bus records with IDs: [58, 59, 60, 61, 62] 
+2025-05-27 07:46:54,388 2213 INFO Mekong odoo.addons.sms.models.sms_sms: GC'd 0 sms marked for deletion 
+2025-05-27 07:47:01,513 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) done in 16.823s 
+2025-05-27 07:47:01,924 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) processed 0 records, 0 records remaining 
+2025-05-27 07:47:02,095 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Auto-vacuum internal data' (1) completed 
+2025-05-27 07:47:02,806 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) starting 
+2025-05-27 07:47:03,108 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) done in 0.299s 
+2025-05-27 07:47:03,292 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) processed 0 records, 0 records remaining 
+2025-05-27 07:47:03,462 2213 INFO Mekong odoo.addons.base.models.ir_cron: Job 'Base: Portal Users Deletion' (2) completed 
+2025-05-27 07:47:18,861 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:47:18] "GET /web/database/selector HTTP/1.1" 200 - 5 0.368 0.812
+2025-05-27 07:47:52,826 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:47:52] "GET /web/database/selector HTTP/1.1" 200 - 5 0.386 0.799
+2025-05-27 07:48:27,133 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:48:27] "GET /web/database/selector HTTP/1.1" 200 - 5 0.339 1.161
+2025-05-27 07:49:01,267 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:49:01] "GET /web/database/selector HTTP/1.1" 200 - 5 0.353 1.006
+2025-05-27 07:49:35,288 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:49:35] "GET /web/database/selector HTTP/1.1" 200 - 5 0.389 0.845
+2025-05-27 07:50:09,720 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:50:09] "GET /web/database/selector HTTP/1.1" 200 - 5 0.478 1.164
+2025-05-27 07:50:43,650 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:50:43] "GET /web/database/selector HTTP/1.1" 200 - 5 0.341 0.806
+2025-05-27 07:51:17,786 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:51:17] "GET /web/database/selector HTTP/1.1" 200 - 5 0.405 0.945
+2025-05-27 07:51:51,859 2207 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:51:51] "GET /web/database/selector HTTP/1.1" 200 - 5 0.350 0.915
+2025-05-27 07:52:25,843 2206 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:52:25] "GET /web/database/selector HTTP/1.1" 200 - 5 0.338 0.868
+2025-05-27 07:52:59,986 2205 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:52:59] "GET /web/database/selector HTTP/1.1" 200 - 5 0.380 0.940
+2025-05-27 07:53:34,928 46 INFO Mekong werkzeug: 127.0.0.1 - - [27/May/2025 07:53:34] "GET /web/database/selector HTTP/1.1" 200 - 5 0.386 1.786
