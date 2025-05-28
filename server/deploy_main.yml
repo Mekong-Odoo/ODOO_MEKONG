@@ -1,0 +1,98 @@
+name: 🚀 Deploy Odoo to EC2 (Incremental)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout source code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Setup SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: 📋 Lấy danh sách file thay đổi trong thư mục server/
+        id: diff
+        run: |
+          echo "CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^server/' || true)" >> $GITHUB_OUTPUT
+
+      - name: 📂 Copy file thay đổi lên EC2
+        if: steps.diff.outputs.CHANGED != ''
+        run: |
+          echo "${{ steps.diff.outputs.CHANGED }}" | tr ' ' '\n' > changed_files.txt
+          cat changed_files.txt
+
+          while IFS= read -r file; do
+            echo "📤 Copying $file"
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no" "$file" ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/odoo_deploy/"${file#server/}"
+          done < changed_files.txt
+
+      - name: 🚀 SSH vào EC2 và tiến hành deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            set -e
+            echo "📂 Di chuyển vào thư mục dự án"
+            cd ~/odoo_deploy
+
+            echo "🔧 Phân quyền script"
+            chmod +x restart-odoo.sh
+
+            echo "🚀 Khởi động lại Odoo"
+            ./restart-odoo.sh
+
+            echo "📜 Xem log khởi động Odoo"
+            docker logs --tail=50 odoo_app || echo "⚠️ Không lấy được docker logs"
+            docker exec -it odoo_app tail -n 20 /var/log/odoo/odoo.log || echo "⚠️ Không lấy được log trong container"
+
+            echo "⏳ Đợi Odoo hoạt động..."
+            for i in {1..12}; do
+              if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
+                 curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
+                echo "✅ Odoo is running!"
+                break
+              else
+                echo "⏰ Waiting for Odoo to start... ($i/12)"
+                sleep 10
+              fi
+            done
+
+            if [ $i -eq 12 ]; then
+              echo "❌ Odoo không phản hồi sau 2 phút!"
+              exit 1
+            fi
+
+            echo "🎉 Deploy thành công!"
+          EOF
+
+      - name: 📧 Gửi email thông báo kết quả
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: ${{ job.status == 'success' && '🎉 DEPLOY SUCCESS' || '💥 DEPLOY FAILED' }} - Odoo
+          to: ${{ secrets.USER_DEPLOY_NOTIFY }}
+          from: "Odoo Deploy Bot <${{ secrets.SMTP_USERNAME }}>"
+          body: |
+            Xin chào,
+
+            Deploy Status: ${{ job.status == 'success' && 'THÀNH CÔNG 🎉' || 'THẤT BẠI ❌' }}
+            Branch: main
+            Commit: ${{ github.sha }}
+            Tác giả: ${{ github.event.pusher.name }}
+
+            Kiểm tra hệ thống Odoo tại:
+            - https://52.221.232.143:8069
+            - https://mekong-odoo.ddns.net:8069
+
+            Trân trọng,  
+            Deploy Bot
