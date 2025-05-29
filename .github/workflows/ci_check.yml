@@ -37,75 +37,141 @@ jobs:
           else
             echo "has_flake8_errors=false" >> $GITHUB_OUTPUT
           fi
+
       - name: 📝 Tạo file .env từ GitHub Secrets
         run: |
           cd server
           cat <<EOF > .env
-            DB_HOST=${{ secrets.DB_HOST }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_USER=${{ secrets.DB_USER }}
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_NAME=${{ secrets.DB_NAME }}
-            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
-            FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_USER=${{ secrets.DB_USER }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_NAME=${{ secrets.DB_NAME }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
           EOF
+
+      # Thêm step để thiết lập Docker buildx
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: 🔧 Cài đặt Docker Compose
         run: |
-          # Cài đặt Docker Compose standalone binary
           sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
-          # Verify installation
           docker-compose --version
-      - name: 🐳 Build và chạy Odoo container theo thứ tự chuẩn
+
+      # Thêm step để pull base image trước
+      - name: 🐳 Pull base Odoo image
+        run: |
+          docker pull odoo:18.0
+
+      - name: 🐳 Build và chạy Odoo container với retry logic
         id: docker_build
         run: |
           echo "🚀 Chạy Docker build/test..."
           cd server
-          docker-compose down -v
-          docker-compose build
+          
+          # Cleanup trước khi bắt đầu
+          docker-compose down -v --remove-orphans 2>/dev/null || true
+          docker system prune -f 2>/dev/null || true
+          
+          # Build với retry logic
+          for i in {1..3}; do
+            echo "🔨 Build attempt $i..."
+            if docker-compose build --no-cache --pull; then
+              echo "✅ Build thành công!"
+              break
+            else
+              echo "❌ Build failed attempt $i"
+              if [ "$i" -eq 3 ]; then
+                echo "💥 Build failed sau 3 lần thử!"
+                exit 1
+              fi
+              sleep 30
+            fi
+          done
+          
+          # Start services
           docker-compose up -d
-          sleep 60
+          
+          # Đợi container khởi động
+          echo "⏳ Đợi Odoo khởi động..."
+          sleep 90
+          
+          # Kiểm tra container status
           docker ps > reports/docker_ps.txt
+          
+          # Kiểm tra logs ngay lập tức
+          docker logs odoo_app > reports/startup_logs.txt 2>&1 || true
 
-      - name: 🔍 Lấy log Odoo từ container
+      - name: 🔍 Lấy log Odoo từ container với timeout
         id: health_check
+        timeout-minutes: 5
         run: |
           echo "📦 Ghi log Odoo..."
           mkdir -p reports
-          docker logs -f odoo_app > reports/odoo_full_logs.txt 2>&1 &
+          
+          # Lấy logs với timeout
+          timeout 240s docker logs -f odoo_app > reports/odoo_full_logs.txt 2>&1 &
+          
+          # Đợi một chút để logs được ghi
           sleep 60
-          docker exec -i odoo_app tail -n 50 /var/log/odoo/odoo.log > reports/odoo_tail_50.txt || true
-          if grep -Ei "ERROR|CRITICAL|Traceback|Exception" reports/odoo_tail_50.txt > reports/log_errors.txt; then
+          
+          # Lấy log từ file log trong container (nếu có)
+          docker exec odoo_app tail -n 100 /var/log/odoo/odoo.log > reports/odoo_tail_100.txt 2>/dev/null || \
+          docker logs odoo_app --tail=100 > reports/odoo_tail_100.txt 2>&1
+          
+          # Kiểm tra lỗi trong logs
+          if grep -Ei "ERROR|CRITICAL|Traceback|Exception|Failed" reports/odoo_tail_100.txt > reports/log_errors.txt 2>/dev/null; then
             echo "has_log_errors=true" >> $GITHUB_OUTPUT
           else
             echo "has_log_errors=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🌐 Kiểm tra Odoo service (http://localhost:8069)
+      - name: 🌐 Kiểm tra Odoo service với retry
         id: service_check
         run: |
-          for i in {1..10}; do
-            if curl -sSf http://localhost:8069/ > /dev/null 2>&1; then
-              echo "✅ Odoo phản hồi"
+          echo "🔍 Kiểm tra kết nối Odoo..."
+          
+          # Kiểm tra container có đang chạy không
+          if ! docker ps | grep odoo_app; then
+            echo "❌ Container không chạy!"
+            echo "service_available=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Thử kết nối với retry logic
+          for i in {1..15}; do
+            echo "🔄 Thử kết nối lần $i/15..."
+            
+            # Kiểm tra multiple endpoints
+            if curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/ > /dev/null 2>&1 || \
+               curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/web/database/selector > /dev/null 2>&1; then
+              echo "✅ Odoo đã sẵn sàng!"
               echo "service_available=true" >> $GITHUB_OUTPUT
               break
             fi
-            echo "⏳ Thử lại lần $i..."
-            sleep 60
+            
+            if [ "$i" -eq 15 ]; then
+              echo "❌ Không thể kết nối đến Odoo sau 15 lần thử"
+              echo "service_available=false" >> $GITHUB_OUTPUT
+              # Lấy thêm thông tin debug
+              docker exec odoo_app ps aux > reports/container_processes.txt 2>/dev/null || true
+              docker exec odoo_app netstat -tlnp > reports/container_ports.txt 2>/dev/null || true
+            else
+              sleep 40
+            fi
           done
-          if [ "$i" -eq 10 ]; then
-            echo "❌ Không thể kết nối đến Odoo"
-            echo "service_available=false" >> $GITHUB_OUTPUT
-            echo "Odoo không phản hồi sau 100 giây" > reports/curl_error.txt
-          fi
 
       - name: 🧹 Cleanup Docker
         if: always()
         run: |
           echo "🧹 Dọn dẹp Docker..."
           cd server || true
-          docker-compose down -v 2>/dev/null || true
-          docker system prune -f || true
+          docker-compose logs odoo > reports/final_logs.txt 2>&1 || true
+          docker-compose down -v --remove-orphans 2>/dev/null || true
+          docker system prune -f 2>/dev/null || true
 
       - name: 📋 Tạo báo cáo CI tổng hợp
         if: always()
@@ -115,6 +181,12 @@ jobs:
           echo "- **Docker Build**: ${{ steps.docker_build.outcome == 'success' && '✅ Success' || '❌ Failed' }}" >> reports/ci_summary.txt
           echo "- **Log Odoo**: ${{ steps.health_check.outputs.has_log_errors == 'true' && '❌ Có lỗi' || '✅ Clean' }}" >> reports/ci_summary.txt
           echo "- **Service Check**: ${{ steps.service_check.outputs.service_available == 'true' && '✅ OK' || '❌ Không phản hồi' }}" >> reports/ci_summary.txt
+          
+          echo "" >> reports/ci_summary.txt
+          echo "### 🔧 Debug Information" >> reports/ci_summary.txt
+          echo "- Docker Version: $(docker --version)" >> reports/ci_summary.txt
+          echo "- Docker Compose Version: $(docker-compose --version)" >> reports/ci_summary.txt
+          echo "- Build Time: $(date)" >> reports/ci_summary.txt
 
       - name: 📧 Gửi email kết quả CI
         if: always()
@@ -129,7 +201,7 @@ jobs:
           to: ${{ secrets.USER_CI_NOTIFY }}
           from: "Odoo CI Bot <${{ secrets.SMTP_USERNAME }}>"
           body: |
-            Kính gửi Leader,
+            Xin chào,
 
             CI đã chạy trên PR #${{ github.event.number }}: "${{ github.event.pull_request.title }}"
             - Tác giả: ${{ github.event.pull_request.user.login }}

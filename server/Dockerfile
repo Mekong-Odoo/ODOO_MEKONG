@@ -2,8 +2,14 @@ FROM odoo:18.0
 
 USER root
 
+# Cập nhật sources.list và thêm các repository cần thiết
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse" > /etc/apt/sources.list && \
+    echo "deb http://archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://archive.ubuntu.com/ubuntu/ noble-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://security.ubuntu.com/ubuntu/ noble-security main restricted universe multiverse" >> /etc/apt/sources.list
+
 # Cài đặt các dependencies cần thiết và locale
-RUN apt-get update && apt-get install -y \
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
     build-essential \
     wget \
     git \
@@ -13,7 +19,7 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     libxml2-dev \
     libxslt1-dev \
-    libjpeg-dev \
+    libjpeg62-turbo-dev \
     zlib1g-dev \
     python3-dev \
     python3-wheel \
@@ -23,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     gosu \
     locales \
+    ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
@@ -30,7 +37,10 @@ RUN apt-get update && apt-get install -y \
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-# Cài đặt thư viện Python cần thiết một cách an toàn không gỡ cài đặt gói hệ thống
+# Cập nhật pip trước khi cài đặt packages
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
+# Cài đặt thư viện Python cần thiết một cách an toàn
 RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
     geoip2 \
     num2words \
@@ -51,31 +61,31 @@ RUN pip3 install --no-cache-dir --break-system-packages --ignore-installed \
     qrcode \
     vobject \
     python-dateutil \
-    Babel>=2.9.1 \
-    chardet>=5.0.0 \
-    decorator>=5.1.1 \
-    docutils>=0.14 \
-    gevent>=22.10.2 \
-    greenlet>=2.0.0 \
-    idna>=3.4 \
-    Jinja2>=3.0.0 \
-    lxml>=4.9.1 \
-    MarkupSafe>=2.0.0 \
-    ofxparse>=0.21 \
-    Pillow>=9.3.0 \
-    psutil>=5.9.4 \
-    pydot>=1.4.2 \
-    pyserial>=3.5 \
-    python-stdnum>=1.17 \
-    pytz>=2022.6 \
-    qrcode>=7.3.1 \
-    reportlab>=3.6.11 \
-    requests>=2.28.1 \
-    urllib3>=1.26.12 \
-    vobject>=0.9.6.1 \
-    Werkzeug>=2.0.0 \
-    XlsxWriter>=3.0.3 \
-    zeep>=4.2.1
+    "Babel>=2.9.1" \
+    "chardet>=5.0.0" \
+    "decorator>=5.1.1" \
+    "docutils>=0.14" \
+    "gevent>=22.10.2" \
+    "greenlet>=2.0.0" \
+    "idna>=3.4" \
+    "Jinja2>=3.0.0" \
+    "lxml>=4.9.1" \
+    "MarkupSafe>=2.0.0" \
+    "ofxparse>=0.21" \
+    "Pillow>=9.3.0" \
+    "psutil>=5.9.4" \
+    "pydot>=1.4.2" \
+    "pyserial>=3.5" \
+    "python-stdnum>=1.17" \
+    "pytz>=2022.6" \
+    "qrcode>=7.3.1" \
+    "reportlab>=3.6.11" \
+    "requests>=2.28.1" \
+    "urllib3>=1.26.12" \
+    "vobject>=0.9.6.1" \
+    "Werkzeug>=2.0.0" \
+    "XlsxWriter>=3.0.3" \
+    "zeep>=4.2.1"
 
 # Tạo các thư mục cần thiết
 RUN mkdir -p /mnt/custom_modules \
@@ -85,7 +95,7 @@ RUN mkdir -p /mnt/custom_modules \
     && mkdir -p /var/log/odoo \
     && mkdir -p /var/run/odoo
 
-# Thiết lập quyền truy cập cho user odoo (root -> user odoo)
+# Thiết lập quyền truy cập cho user odoo
 RUN chown -R odoo:odoo /mnt/custom_modules \
     && chown -R odoo:odoo /usr/share/geoip \
     && chown -R odoo:odoo /var/lib/odoo \
@@ -104,8 +114,11 @@ COPY entrypoint.sh /entrypoint.sh
 # Gán quyền thực thi
 RUN chmod +x /entrypoint.sh
 
-# Cổng expose (8069: Giao diện web chính của Odoo/ 8072: Cổng longpolling (thông báo thời gian thực, chat...))
+# Cổng expose
 EXPOSE 8069 8072
+
+# Chuyển về user odoo để chạy ứng dụng
+USER odoo
 
 # Dùng entrypoint thay cho mặc định
 ENTRYPOINT ["/entrypoint.sh"]
