@@ -37,7 +37,6 @@ jobs:
           else
             echo "has_flake8_errors=false" >> $GITHUB_OUTPUT
           fi
-
       - name: 📝 Tạo file .env từ GitHub Secrets
         run: |
           cd server
@@ -50,7 +49,13 @@ jobs:
             ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
             FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
           EOF
-
+      - name: 🔧 Cài đặt Docker Compose
+        run: |
+          # Cài đặt Docker Compose V2 (docker compose)
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
+          # Tạo alias cho docker-compose nếu cần
+          sudo ln -sf /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
       - name: 🐳 Build và chạy Odoo container theo thứ tự chuẩn
         id: docker_build
         run: |
