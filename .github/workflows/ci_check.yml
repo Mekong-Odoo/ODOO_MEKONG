@@ -51,11 +51,11 @@ jobs:
           EOF
       - name: 🔧 Cài đặt Docker Compose
         run: |
-          # Cài đặt Docker Compose V2 (docker compose)
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-          # Tạo alias cho docker-compose nếu cần
-          sudo ln -sf /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+          # Cài đặt Docker Compose standalone binary
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          # Verify installation
+          docker-compose --version
       - name: 🐳 Build và chạy Odoo container theo thứ tự chuẩn
         id: docker_build
         run: |
@@ -102,9 +102,10 @@ jobs:
       - name: 🧹 Cleanup Docker
         if: always()
         run: |
-          cd server
-          docker-compose down -v
-          docker system prune -f
+          echo "🧹 Dọn dẹp Docker..."
+          cd server || true
+          docker-compose down -v 2>/dev/null || true
+          docker system prune -f || true
 
       - name: 📋 Tạo báo cáo CI tổng hợp
         if: always()
