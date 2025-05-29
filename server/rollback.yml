@@ -1,0 +1,243 @@
+name: 🔄 Rollback Odoo
+
+on:
+  workflow_dispatch:
+    inputs:
+      backup_name:
+        description: 'Tên backup để rollback (để trống để xem danh sách)'
+        required: false
+        type: string
+      commit_hash:
+        description: 'Hoặc nhập commit hash để rollback'
+        required: false
+        type: string
+
+jobs:
+  list-backups:
+    if: ${{ github.event.inputs.backup_name == '' && github.event.inputs.commit_hash == '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔐 Setup SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: 📋 Liệt kê backup có sẵn
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          echo "📁 DANH SÁCH BACKUP CÓ SẴN:"
+          echo "=========================="
+          
+          if [ -d /home/ec2-user/odoo_backup ]; then
+            cd /home/ec2-user/odoo_backup
+            for backup in $(ls -t); do
+              if [ -d "$backup" ]; then
+                echo "📂 $backup"
+                if [ -f "$backup/commit_hash.txt" ]; then
+                  echo "   🔗 Commit: $(cat $backup/commit_hash.txt)"
+                fi
+                echo "   📅 $(stat -c %y $backup | cut -d. -f1)"
+                echo ""
+              fi
+            done
+          else
+            echo "❌ Không tìm thấy thư mục backup"
+          fi
+          EOF
+
+  rollback:
+    if: ${{ github.event.inputs.backup_name != '' || github.event.inputs.commit_hash != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout source code
+        if: ${{ github.event.inputs.commit_hash != '' }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.commit_hash }}
+
+      - name: 🔐 Setup SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: 🔄 Rollback bằng backup name
+        if: ${{ github.event.inputs.backup_name != '' }}
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+          set -e
+          
+          BACKUP_NAME="${{ github.event.inputs.backup_name }}"
+          BACKUP_DIR="/home/ec2-user/odoo_backup/\$BACKUP_NAME"
+          
+          echo "🔍 Kiểm tra backup: \$BACKUP_NAME"
+          
+          if [ ! -d "\$BACKUP_DIR" ]; then
+            echo "❌ Không tìm thấy backup: \$BACKUP_NAME"
+            echo "📁 Các backup có sẵn:"
+            ls -la /home/ec2-user/odoo_backup/ | grep "^d" | awk '{print \$9}' | grep -v "^\.$" | grep -v "^\.\.$" | sort -r
+            exit 1
+          fi
+          
+          # Tạo backup version hiện tại (nén để tiết kiệm)
+          CURRENT_BACKUP="/home/ec2-user/odoo_backup/before_rollback_\$(date +%m%d_%H%M)"
+          echo "💾 Backup version hiện tại..."
+          mkdir -p "\$CURRENT_BACKUP"
+          
+          if [ -d /home/ec2-user/odoo_deploy ]; then
+            cd /home/ec2-user/odoo_deploy
+            find . -type f \
+              ! -path "*/node_modules/*" \
+              ! -path "*/.git/*" \
+              ! -path "*/logs/*" \
+              ! -path "*/__pycache__/*" \
+              ! -name "*.pyc" \
+              ! -name "*.log" \
+              -size -10M \
+              | tar czf "\$CURRENT_BACKUP/backup.tar.gz" -T -
+          fi
+          
+          # Dừng Odoo
+          echo "⏹️ Dừng Odoo..."
+          cd /home/ec2-user/odoo_deploy
+          docker-compose down 2>/dev/null || docker stop odoo_app 2>/dev/null || true
+          
+          # Rollback (xử lý cả backup nén và không nén)
+          echo "🔄 Thực hiện rollback..."
+          rm -rf /home/ec2-user/odoo_deploy/*
+          
+          if [ -f "\$BACKUP_DIR/odoo_backup.tar.gz" ]; then
+            cd /home/ec2-user/odoo_deploy
+            tar xzf "\$BACKUP_DIR/odoo_backup.tar.gz"
+          else
+            cp -r \$BACKUP_DIR/* /home/ec2-user/odoo_deploy/
+          fi
+          
+          # Phân quyền
+          cd /home/ec2-user/odoo_deploy
+          chmod +x *.sh 2>/dev/null || true
+          
+          # Khởi động lại
+          echo "🚀 Khởi động lại Odoo..."
+          ./restart-odoo.sh
+          
+          # Kiểm tra
+          echo "⏳ Kiểm tra Odoo..."
+          sleep 15
+          
+          for i in {1..10}; do
+            if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
+               curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
+              echo "✅ Rollback thành công!"
+              break
+            else
+              echo "⏰ Đang kiểm tra... (\$i/10)"
+              sleep 10
+            fi
+          done
+          
+          if [ \$i -eq 10 ]; then
+            echo "❌ Rollback có vấn đề, Odoo chưa phản hồi"
+            exit 1
+          fi
+          EOF
+
+      - name: 🔄 Rollback bằng commit hash
+        if: ${{ github.event.inputs.commit_hash != '' }}
+        run: |
+          # Copy files từ commit cụ thể
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" --delete server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/odoo_deploy_temp/
+          
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          set -e
+          
+          echo "🔄 Rollback về commit: ${{ github.event.inputs.commit_hash }}"
+          
+          # Backup version hiện tại (nén)
+          CURRENT_BACKUP="/home/ec2-user/odoo_backup/before_rollback_$(date +%m%d_%H%M)"
+          echo "💾 Backup version hiện tại..."
+          mkdir -p "$CURRENT_BACKUP"
+          
+          if [ -d /home/ec2-user/odoo_deploy ]; then
+            cd /home/ec2-user/odoo_deploy
+            find . -type f \
+              ! -path "*/node_modules/*" \
+              ! -path "*/.git/*" \
+              ! -path "*/logs/*" \
+              ! -path "*/__pycache__/*" \
+              ! -name "*.pyc" \
+              ! -name "*.log" \
+              -size -10M \
+              | tar czf "$CURRENT_BACKUP/backup.tar.gz" -T -
+          fi
+          
+          echo "${{ github.event.inputs.commit_hash }}" > "$CURRENT_BACKUP/target_commit.txt"
+          
+          # Dừng Odoo
+          echo "⏹️ Dừng Odoo..."
+          cd /home/ec2-user/odoo_deploy
+          docker-compose down 2>/dev/null || docker stop odoo_app 2>/dev/null || true
+          
+          # Replace với code từ commit
+          echo "📂 Cập nhật code..."
+          rm -rf /home/ec2-user/odoo_deploy/*
+          cp -r /home/ec2-user/odoo_deploy_temp/* /home/ec2-user/odoo_deploy/
+          rm -rf /home/ec2-user/odoo_deploy_temp
+          
+          # Phân quyền và khởi động
+          cd /home/ec2-user/odoo_deploy
+          chmod +x *.sh 2>/dev/null || true
+          
+          echo "🚀 Khởi động lại Odoo..."
+          ./restart-odoo.sh
+          
+          # Kiểm tra
+          echo "⏳ Kiểm tra Odoo..."
+          sleep 15
+          
+          for i in {1..10}; do
+            if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
+               curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
+              echo "✅ Rollback thành công!"
+              break
+            else
+              echo "⏰ Đang kiểm tra... ($i/10)"
+              sleep 10
+            fi
+          done
+          
+          if [ $i -eq 10 ]; then
+            echo "❌ Rollback có vấn đề"
+            exit 1
+          fi
+          EOF
+
+      - name: 📧 Gửi email thông báo rollback
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: ${{ job.status == 'success' && '🔄 ROLLBACK SUCCESS' || '💥 ROLLBACK FAILED' }} - Odoo
+          to: ${{ secrets.USER_DEPLOY_NOTIFY }}
+          from: "Odoo Deploy Bot <${{ secrets.SMTP_USERNAME }}>"
+          body: |
+            Xin chào,
+            
+            Rollback Status: ${{ job.status == 'success' && 'THÀNH CÔNG 🎉' || 'THẤT BẠI ❌' }}
+            
+            ${{ github.event.inputs.backup_name != '' && format('Backup: {0}', github.event.inputs.backup_name) || '' }}
+            ${{ github.event.inputs.commit_hash != '' && format('Commit: {0}', github.event.inputs.commit_hash) || '' }}
+            
+            Thực hiện bởi: ${{ github.actor }}
+            Thời gian: ${{ github.event.created_at }}
+            
+            Kiểm tra hệ thống Odoo tại:
+            🔗 https://52.221.232.143:8069
+            🔗 https://mekong-odoo.ddns.net:8069
+            
+            Trân trọng,
+            Deploy Bot

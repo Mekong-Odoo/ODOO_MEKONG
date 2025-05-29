@@ -1,4 +1,4 @@
-name: 🚀 Deploy Odoo to EC2 (Incremental)
+name: 🚀 Deploy Odoo to EC2 (Incremental with Rollback)
 
 on:
   push:
@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: 📥 Checkout source code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Lấy toàn bộ lịch sử để có thể rollback
 
       - name: 🔐 Setup SSH key
         uses: webfactory/ssh-agent@v0.7.0
@@ -21,53 +23,189 @@ jobs:
         id: diff
         run: |
           echo "CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^server/' || true)" >> $GITHUB_OUTPUT
+          echo "PREVIOUS_COMMIT=${{ github.event.before }}" >> $GITHUB_OUTPUT
+
+      - name: 💾 Tạo backup tối ưu trước khi deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          set -e
+          echo "💾 Tạo backup tối ưu của version hiện tại..."
+          
+          # Tạo thư mục backup với timestamp ngắn gọn
+          BACKUP_DIR="~/odoo_backup/$(date +%m%d_%H%M)_$(echo ${{ github.sha }} | cut -c1-7)"
+          mkdir -p "$BACKUP_DIR"
+          
+          # Chỉ backup những files quan trọng, bỏ qua files không cần thiết
+          if [ -d /home/ec2-user/odoo_deploy ]; then
+            cd /home/ec2-user/odoo_deploy
+            
+            # Tạo danh sách files cần backup (loại trừ files lớn không cần thiết)
+            find . -type f \
+              ! -path "*/node_modules/*" \
+              ! -path "*/.git/*" \
+              ! -path "*/logs/*" \
+              ! -path "*/tmp/*" \
+              ! -path "*/__pycache__/*" \
+              ! -name "*.pyc" \
+              ! -name "*.pyo" \
+              ! -name "*.log" \
+              ! -name "*.tmp" \
+              ! -name "*.swp" \
+              -size -10M \
+              | tar czf "$BACKUP_DIR/odoo_backup.tar.gz" -T -
+            
+            # Lưu metadata nhỏ gọn
+            echo "${{ github.event.before }}" > "$BACKUP_DIR/commit.txt"
+            echo "$(date)" > "$BACKUP_DIR/date.txt"
+            du -sh "$BACKUP_DIR" > "$BACKUP_DIR/size.txt"
+          fi
+          
+          # Quản lý backup thông minh: Giữ 3 backup gần nhất + 2 backup hàng tuần
+          cd /home/ec2-user/odoo_backup
+          
+          # Giữ 3 backup gần nhất
+          RECENT_BACKUPS=$(ls -t | head -n 3)
+          
+          # Giữ 2 backup cũ nhất mỗi tuần (backup đầu tiên của tuần)
+          WEEKLY_BACKUPS=$(ls -t | awk 'NR > 3' | head -n 14 | awk 'NR % 7 == 1' | head -n 2)
+          
+          # Tạo danh sách backup cần giữ lại
+          KEEP_BACKUPS=$(echo -e "$RECENT_BACKUPS\n$WEEKLY_BACKUPS" | sort -u)
+          
+          # Xóa các backup không cần thiết
+          for backup in $(ls -t); do
+            if ! echo "$KEEP_BACKUPS" | grep -q "^$backup$"; then
+              echo "🗑️ Xóa backup cũ: $backup"
+              rm -rf "$backup"
+            fi
+          done
+          
+          echo "✅ Backup hoàn tất. Kích thước: $(du -sh $BACKUP_DIR | cut -f1)"
+          echo "📊 Tổng dung lượng backup: $(du -sh /home/ec2-user/odoo_backup | cut -f1)"
+          EOF
 
       - name: 📂 Copy file thay đổi lên EC2
+        id: copy_files
         if: steps.diff.outputs.CHANGED != ''
         run: |
           echo "${{ steps.diff.outputs.CHANGED }}" | tr ' ' '\n' > changed_files.txt
           cat changed_files.txt
-
+          
           while IFS= read -r file; do
             echo "📤 Copying $file"
             rsync -avz -e "ssh -o StrictHostKeyChecking=no" "$file" ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/odoo_deploy/"${file#server/}"
           done < changed_files.txt
 
-      - name: 🚀 SSH vào EC2 và tiến hành deploy
+      - name: 🚀 Deploy và kiểm tra
+        id: deploy
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            set -e
-            echo "📂 Di chuyển vào thư mục dự án"
-            cd ~/odoo_deploy
-
-            echo "🔧 Phân quyền script"
-            chmod +x restart-odoo.sh
-
-            echo "🚀 Khởi động lại Odoo"
-            ./restart-odoo.sh
-
-            echo "📜 Xem log khởi động Odoo"
-            docker logs --tail=50 odoo_app || echo "⚠️ Không lấy được docker logs"
-            docker exec -it odoo_app tail -n 20 /var/log/odoo/odoo.log || echo "⚠️ Không lấy được log trong container"
-
-            echo "⏳ Đợi Odoo hoạt động..."
-            for i in {1..12}; do
-              if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
-                 curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
-                echo "✅ Odoo is running!"
-                break
-              else
-                echo "⏰ Waiting for Odoo to start... ($i/12)"
-                sleep 10
-              fi
-            done
-
-            if [ $i -eq 12 ]; then
-              echo "❌ Odoo không phản hồi sau 2 phút!"
-              exit 1
+          set -e
+          
+          echo "📂 Di chuyển vào thư mục dự án"
+          cd /home/ec2-user/odoo_deploy
+          
+          echo "🔧 Phân quyền script"
+          chmod +x restart-odoo.sh
+          
+          echo "🚀 Khởi động lại Odoo"
+          ./restart-odoo.sh
+          
+          echo "📜 Xem log khởi động Odoo"
+          docker logs --tail=50 odoo_app || echo "⚠️ Không lấy được docker logs"
+          docker exec odoo_app tail -n 20 /var/log/odoo/odoo.log || echo "⚠️ Không lấy được log trong container"
+          
+          echo "⏳ Đợi Odoo hoạt động..."
+          ODOO_READY=false
+          
+          for i in {1..12}; do
+            if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
+               curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
+              echo "✅ Odoo is running!"
+              ODOO_READY=true
+              break
+            else
+              echo "⏰ Waiting for Odoo to start... ($i/12)"
+              sleep 10
             fi
+          done
+          
+          if [ "$ODOO_READY" = false ]; then
+            echo "❌ Odoo không phản hồi sau 2 phút!"
+            exit 1
+          fi
+          
+          # Kiểm tra thêm các lỗi trong log
+          echo "🔍 Kiểm tra lỗi trong log..."
+          ERROR_COUNT=$(docker exec odoo_app grep -i "error\|exception\|traceback" /var/log/odoo/odoo.log | tail -20 | wc -l || echo "0")
+          
+          if [ "$ERROR_COUNT" -gt 5 ]; then
+            echo "⚠️ Phát hiện nhiều lỗi trong log Odoo"
+            docker exec odoo_app tail -30 /var/log/odoo/odoo.log
+            exit 1
+          fi
+          
+          echo "🎉 Deploy thành công!"
+          EOF
 
-            echo "🎉 Deploy thành công!"
+      - name: 🔄 Rollback khi deploy thất bại
+        if: failure() && steps.deploy.outcome == 'failure'
+        run: |
+          echo "💥 Deploy thất bại! Bắt đầu rollback..."
+          
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          set -e
+          
+          echo "🔄 Thực hiện rollback..."
+          
+          # Tìm backup gần nhất
+          LATEST_BACKUP=$(ls -t ~/odoo_backup/ | head -n 1)
+          
+          if [ -z "$LATEST_BACKUP" ]; then
+            echo "❌ Không tìm thấy backup để rollback!"
+            exit 1
+          fi
+          
+          echo "📁 Rollback từ backup: $LATEST_BACKUP"
+          
+          # Backup version bị lỗi để debug sau
+          FAILED_DIR="~/odoo_backup/failed_$(date +%Y%m%d_%H%M%S)"
+          mkdir -p "$FAILED_DIR"
+          cp -r ~/odoo_deploy/* "$FAILED_DIR/" 2>/dev/null || true
+          
+          # Restore từ backup (giải nén nếu là file nén)
+          rm -rf ~/odoo_deploy/*
+          if [ -f ~/odoo_backup/"$LATEST_BACKUP"/odoo_backup.tar.gz ]; then
+            cd ~/odoo_deploy
+            tar xzf ~/odoo_backup/"$LATEST_BACKUP"/odoo_backup.tar.gz
+          else
+            cp -r ~/odoo_backup/"$LATEST_BACKUP"/* ~/odoo_deploy/
+          fi
+          
+          echo "🔧 Phân quyền script sau rollback"
+          cd ~/odoo_deploy
+          chmod +x restart-odoo.sh
+          
+          echo "🚀 Khởi động lại Odoo với version cũ"
+          ./restart-odoo.sh
+          
+          echo "⏳ Kiểm tra Odoo sau rollback..."
+          for i in {1..10}; do
+            if curl -k -sSf https://52.221.232.143:8069 > /dev/null 2>&1 || \
+               curl -k -sSf https://mekong-odoo.ddns.net:8069 > /dev/null 2>&1; then
+              echo "✅ Rollback thành công! Odoo đã hoạt động trở lại"
+              break
+            else
+              echo "⏰ Đang kiểm tra sau rollback... ($i/10)"
+              sleep 10
+            fi
+          done
+          
+          if [ $i -eq 10 ]; then
+            echo "❌ Rollback thất bại! Cần can thiệp thủ công"
+            exit 1
+          fi
+          
           EOF
 
       - name: 📧 Gửi email thông báo kết quả
@@ -79,20 +217,25 @@ jobs:
           secure: true
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: ${{ job.status == 'success' && '🎉 DEPLOY SUCCESS' || '💥 DEPLOY FAILED' }} - Odoo
+          subject: ${{ job.status == 'success' && '🎉 DEPLOY SUCCESS' || (steps.deploy.outcome == 'failure' && '🔄 DEPLOY FAILED - ROLLBACK COMPLETED' || '💥 DEPLOY FAILED') }} - Odoo
           to: ${{ secrets.USER_DEPLOY_NOTIFY }}
           from: "Odoo Deploy Bot <${{ secrets.SMTP_USERNAME }}>"
           body: |
             Xin chào,
-
+            
             Deploy Status: ${{ job.status == 'success' && 'THÀNH CÔNG 🎉' || 'THẤT BẠI ❌' }}
+            ${{ steps.deploy.outcome == 'failure' && 'Rollback Status: HOÀN TẤT ✅' || '' }}
+            
             Branch: main
             Commit: ${{ github.sha }}
+            ${{ steps.deploy.outcome == 'failure' && format('Previous Commit (Rollback): {0}', github.event.before) || '' }}
             Tác giả: ${{ github.event.pusher.name }}
-
+            
             Kiểm tra hệ thống Odoo tại:
-            - https://52.221.232.143:8069
-            - https://mekong-odoo.ddns.net:8069
-
-            Trân trọng,  
+            🔗 https://52.221.232.143:8069
+            🔗 https://mekong-odoo.ddns.net:8069
+            
+            ${{ job.status != 'success' && '⚠️ Lưu ý: Nếu có vấn đề, vui lòng kiểm tra log trên server hoặc thực hiện rollback thủ công.' || '' }}
+            
+            Trân trọng,
             Deploy Bot

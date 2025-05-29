@@ -62,3 +62,7 @@ TEXT.txt
 key-perm.pem
 # Ẩn mọi file có tên như bên dưới
 /key-perm.pem
+
+# Ẩn đi rollback của server
+rollback.sh
+/rollback.sh
