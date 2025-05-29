@@ -242,4 +242,4 @@ else
     fi
 fi
 
-# Test WF
+# Test WF PULL từ Odoo-staging -> develop
