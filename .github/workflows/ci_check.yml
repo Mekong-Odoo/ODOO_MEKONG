@@ -132,18 +132,18 @@ jobs:
             fi
           done
           
-          # Lấy logs gần nhất
+          # Lấy logs gần nhất - SỬA LẠI TÊN FILE
           echo "📥 Lấy tail logs..."
           if docker exec odoo_app test -f /var/log/odoo/odoo.log 2>/dev/null; then
             echo "📄 Lấy từ log file trong container"
-            docker exec odoo_app tail -n 100 /var/log/odoo/odoo.log > reports/odoo_tail_100.txt 2>/dev/null || true
+            docker exec odoo_app tail -n 50 /var/log/odoo/odoo.log > reports/odoo_tail_50.txt 2>/dev/null || true
           else
             echo "📄 Lấy từ docker logs"
-            docker logs --tail 100 odoo_app > reports/odoo_tail_100.txt 2>&1 || true
+            docker logs --tail 50 odoo_app > reports/odoo_tail_50.txt 2>&1 || true
           fi
           
-          # Kiểm tra lỗi trong logs
-          if [ -f reports/odoo_tail_100.txt ] && grep -Ei "ERROR|CRITICAL|Traceback|Exception|failed|cannot|refused" reports/odoo_tail_100.txt > reports/log_errors.txt; then
+          # Kiểm tra lỗi trong logs - SỬA LẠI ĐỂ DÙNG FILE odoo_tail_50.txt
+          if [ -f reports/odoo_tail_50.txt ] && grep -Ei "ERROR|CRITICAL|Traceback|Exception|failed|cannot|refused" reports/odoo_tail_50.txt > reports/log_errors.txt; then
             echo "has_log_errors=true" >> $GITHUB_OUTPUT
             echo "🔍 Tìm thấy $(wc -l < reports/log_errors.txt) dòng lỗi trong logs"
           else
@@ -202,7 +202,7 @@ jobs:
             echo "service_available=false" >> $GITHUB_OUTPUT
             echo "❌ Odoo service không phản hồi qua tất cả phương pháp"
       
-            # Thu thập thêm thông tin debug
+            # Thu thập thêm thông tin debug - ĐẢM BẢO TẠO FILE debug_info.txt
             echo "=== DEBUG INFO ===" > ../reports/debug_info.txt
             echo "Container status:" >> ../reports/debug_info.txt
             ~/.docker/cli-plugins/docker-compose ps >> ../reports/debug_info.txt 2>&1 || true
