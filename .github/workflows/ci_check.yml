@@ -161,25 +161,25 @@ jobs:
         run: |
           cd server
           service_available=false
-          
+      
           echo "🔍 Phương pháp 1: Kiểm tra container health"
           if ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Up.*healthy\|odoo_app.*Up" && ! ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Exit"; then
             echo "✅ Container đang chạy bình thường"
             service_available=true
           fi
-          
+      
           echo "🔍 Phương pháp 2: Kiểm tra port binding"
           if ss -tulpn | grep -q ":8069"; then
             echo "✅ Port 8069 đang được bind"
             service_available=true
           fi
-          
+      
           echo "🔍 Phương pháp 3: Kiểm tra process Odoo trong container"
           if ~/.docker/cli-plugins/docker-compose exec -T odoo_app pgrep -f "odoo" > /dev/null 2>&1; then
             echo "✅ Process Odoo đang chạy trong container"
             service_available=true
           fi
-          
+      
           echo "🔍 Phương pháp 4: Kiểm tra HTTP (fallback)"
           for i in {1..3}; do
             if curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/web/health > /dev/null 2>&1; then
@@ -194,7 +194,7 @@ jobs:
             echo "⏳ HTTP thử lại lần $i..."
             sleep 20
           done
-          
+      
           # THU THẬP THÔNG TIN DEBUG TRONG MỌI TRƯỜNG HỢP
           echo "🔍 Thu thập thông tin debug..."
           echo "=== DEBUG INFO ===" > ../reports/debug_info.txt
