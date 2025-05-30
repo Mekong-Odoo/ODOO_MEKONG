@@ -161,25 +161,25 @@ jobs:
         run: |
           cd server
           service_available=false
-      
+          
           echo "🔍 Phương pháp 1: Kiểm tra container health"
           if ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Up.*healthy\|odoo_app.*Up" && ! ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Exit"; then
             echo "✅ Container đang chạy bình thường"
             service_available=true
           fi
-      
+          
           echo "🔍 Phương pháp 2: Kiểm tra port binding"
           if ss -tulpn | grep -q ":8069"; then
             echo "✅ Port 8069 đang được bind"
             service_available=true
           fi
-      
+          
           echo "🔍 Phương pháp 3: Kiểm tra process Odoo trong container"
           if ~/.docker/cli-plugins/docker-compose exec -T odoo_app pgrep -f "odoo" > /dev/null 2>&1; then
             echo "✅ Process Odoo đang chạy trong container"
             service_available=true
           fi
-      
+          
           echo "🔍 Phương pháp 4: Kiểm tra HTTP (fallback)"
           for i in {1..3}; do
             if curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/web/health > /dev/null 2>&1; then
@@ -194,22 +194,28 @@ jobs:
             echo "⏳ HTTP thử lại lần $i..."
             sleep 20
           done
-      
+          
+          # THU THẬP THÔNG TIN DEBUG TRONG MỌI TRƯỜNG HỢP
+          echo "🔍 Thu thập thông tin debug..."
+          echo "=== DEBUG INFO ===" > ../reports/debug_info.txt
+          echo "Timestamp: $(date)" >> ../reports/debug_info.txt
+          echo -e "\nContainer status:" >> ../reports/debug_info.txt
+          ~/.docker/cli-plugins/docker-compose ps >> ../reports/debug_info.txt 2>&1 || true
+          echo -e "\nPort status:" >> ../reports/debug_info.txt
+          ss -tulpn | grep 8069 >> ../reports/debug_info.txt 2>&1 || echo "Port 8069 not found" >> ../reports/debug_info.txt
+          echo -e "\nDocker processes:" >> ../reports/debug_info.txt
+          docker ps --filter "name=odoo" >> ../reports/debug_info.txt 2>&1 || true
+          echo -e "\nContainer logs (last 20 lines):" >> ../reports/debug_info.txt
+          ~/.docker/cli-plugins/docker-compose logs --tail 20 odoo_app >> ../reports/debug_info.txt 2>&1 || true
+          
           if [ "$service_available" = true ]; then
             echo "service_available=true" >> $GITHUB_OUTPUT
             echo "✅ Odoo service kiểm tra thành công"
+            echo -e "\nService Status: ✅ AVAILABLE" >> ../reports/debug_info.txt
           else
             echo "service_available=false" >> $GITHUB_OUTPUT
             echo "❌ Odoo service không phản hồi qua tất cả phương pháp"
-      
-            # Thu thập thêm thông tin debug - ĐẢM BẢO TẠO FILE debug_info.txt
-            echo "=== DEBUG INFO ===" > ../reports/debug_info.txt
-            echo "Container status:" >> ../reports/debug_info.txt
-            ~/.docker/cli-plugins/docker-compose ps >> ../reports/debug_info.txt 2>&1 || true
-            echo -e "\nPort status:" >> ../reports/debug_info.txt
-            ss -tulpn | grep 8069 >> ../reports/debug_info.txt 2>&1 || echo "Port 8069 not found" >> ../reports/debug_info.txt
-            echo -e "\nContainer logs (last 20 lines):" >> ../reports/debug_info.txt
-            ~/.docker/cli-plugins/docker-compose logs --tail 20 odoo_app >> ../reports/debug_info.txt 2>&1 || true
+            echo -e "\nService Status: ❌ NOT AVAILABLE" >> ../reports/debug_info.txt
           fi
       - name: 🧹 Cleanup Docker
         if: always()
