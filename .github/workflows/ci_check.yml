@@ -3,7 +3,7 @@ name: 🔍 CI Check on develop
 on:
   pull_request:
     branches: [develop]
-
+    types: [opened, synchronize, reopened]
 jobs:
   check_odoo:
     runs-on: ubuntu-latest
@@ -62,9 +62,9 @@ jobs:
         run: |
           echo "🚀 Chạy Docker build/test..."
           cd server
-          docker-compose down -v
-          docker-compose build
-          docker-compose up -d
+          docker compose down -v
+          docker compose build
+          docker compose up -d
           sleep 60
           docker ps > reports/docker_ps.txt
       - name: 🔍 Lấy log Odoo từ container
@@ -101,7 +101,7 @@ jobs:
         if: always()
         run: |
           cd server
-          docker-compose down -v
+          docker compose down -v
           docker system prune -f
       - name: 📋 Tạo báo cáo CI tổng hợp
         if: always()
