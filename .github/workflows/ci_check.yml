@@ -4,9 +4,11 @@ on:
   pull_request:
     branches: [develop]
     types: [opened, synchronize, reopened]
+
 jobs:
   check_odoo:
     runs-on: ubuntu-latest
+    timeout-minutes: 30  # Thêm timeout để tránh job chạy quá lâu
 
     steps:
       - name: 📥 Lấy source code
@@ -17,16 +19,19 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: 📁 Tạo thư mục reports
+        run: mkdir -p reports
+
       - name: 📦 Cài dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip postgresql-client
           pip install flake8 pylint
+
       - name: 🧪 Chạy flake8 kiểm tra code (addons + custom_modules)
         id: flake8_check
         run: |
           echo "🔍 Kiểm tra flake8..."
-          mkdir -p reports
           flake8 ./server/addons ./server/custom_modules \
             --exclude=*/migrations/*,*/__pycache__/* \
             --max-line-length=88 \
@@ -36,18 +41,20 @@ jobs:
           else
             echo "has_flake8_errors=false" >> $GITHUB_OUTPUT
           fi
+
       - name: 📝 Tạo file .env từ GitHub Secrets
         run: |
           cd server
           cat <<EOF > .env
-            DB_HOST=${{ secrets.DB_HOST }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_USER=${{ secrets.DB_USER }}
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_NAME=${{ secrets.DB_NAME }}
-            ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
-            FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_USER=${{ secrets.DB_USER }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_NAME=${{ secrets.DB_NAME }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
           EOF
+
       - name: 🔧 Cài đặt Docker Compose (v2.27.1)
         run: |
           DOCKER_COMPOSE_VERSION="v2.27.1"
@@ -55,65 +62,101 @@ jobs:
           curl -SL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
           chmod +x ~/.docker/cli-plugins/docker-compose
           echo 'export PATH="$HOME/.docker/cli-plugins:$PATH"' >> $GITHUB_ENV
+
       - name: 🧪 Kiểm tra Docker Compose
         run: docker compose version
+
       - name: 🐳 Build và chạy Odoo container theo thứ tự chuẩn
         id: docker_build
         run: |
           echo "🚀 Chạy Docker build/test..."
           cd server
-          docker compose down -v
+          docker compose down -v || true
           docker compose build
           docker compose up -d
           sleep 60
-          docker ps > reports/docker_ps.txt
+          # Đảm bảo thư mục reports tồn tại
+          mkdir -p ../reports
+          docker ps > ../reports/docker_ps.txt
+
       - name: 🔍 Lấy log Odoo từ container
         id: health_check
         run: |
           echo "📦 Ghi log Odoo..."
-          mkdir -p reports
-          docker logs -f odoo_app > reports/odoo_full_logs.txt 2>&1 &
-          sleep 60
-          docker exec -i odoo_app tail -n 50 /var/log/odoo/odoo.log > reports/odoo_tail_50.txt || true
-          if grep -Ei "ERROR|CRITICAL|Traceback|Exception" reports/odoo_tail_50.txt > reports/log_errors.txt; then
+          # Kiểm tra container có đang chạy không
+          if ! docker ps | grep -q odoo_app; then
+            echo "❌ Container odoo_app không chạy"
+            echo "has_log_errors=true" >> $GITHUB_OUTPUT
+            echo "Container odoo_app không chạy" > reports/log_errors.txt
+            exit 0
+          fi
+          
+          # Lấy logs với timeout
+          timeout 60 docker logs odoo_app > reports/odoo_full_logs.txt 2>&1 || true
+          
+          # Kiểm tra log file có tồn tại trong container không
+          if docker exec odoo_app test -f /var/log/odoo/odoo.log; then
+            docker exec odoo_app tail -n 50 /var/log/odoo/odoo.log > reports/odoo_tail_50.txt || true
+          else
+            # Nếu không có log file, lấy từ stdout
+            docker logs --tail 50 odoo_app > reports/odoo_tail_50.txt 2>&1 || true
+          fi
+          
+          if [ -f reports/odoo_tail_50.txt ] && grep -Ei "ERROR|CRITICAL|Traceback|Exception" reports/odoo_tail_50.txt > reports/log_errors.txt; then
             echo "has_log_errors=true" >> $GITHUB_OUTPUT
           else
             echo "has_log_errors=false" >> $GITHUB_OUTPUT
+            touch reports/log_errors.txt  # Tạo file rỗng để tránh lỗi attachment
           fi
+
       - name: 🌐 Kiểm tra Odoo service (http://localhost:8069)
         id: service_check
         run: |
-          for i in {1..10}; do
+          service_available=false
+          for i in {1..5}; do  # Giảm từ 10 xuống 5 lần thử
             if curl -sSf http://localhost:8069/ > /dev/null 2>&1; then
               echo "✅ Odoo phản hồi"
-              echo "service_available=true" >> $GITHUB_OUTPUT
+              service_available=true
               break
             fi
             echo "⏳ Thử lại lần $i..."
-            sleep 60
+            sleep 30  # Giảm từ 60s xuống 30s
           done
-          if [ "$i" -eq 10 ]; then
+          
+          if [ "$service_available" = true ]; then
+            echo "service_available=true" >> $GITHUB_OUTPUT
+          else
             echo "❌ Không thể kết nối đến Odoo"
             echo "service_available=false" >> $GITHUB_OUTPUT
-            echo "Odoo không phản hồi sau 100 giây" > reports/curl_error.txt
+            echo "Odoo không phản hồi sau 150 giây" > reports/curl_error.txt
           fi
+
       - name: 🧹 Cleanup Docker
         if: always()
         run: |
-          cd server
-          docker compose down -v
-          docker system prune -f
+          cd server || true
+          docker compose down -v || true
+          docker system prune -f || true
+
       - name: 📋 Tạo báo cáo CI tổng hợp
         if: always()
         run: |
-          echo "## 📊 CI Check Results" >> reports/ci_summary.txt
+          # Đảm bảo tất cả file report tồn tại
+          touch reports/flake8_errors.txt
+          touch reports/log_errors.txt
+          touch reports/odoo_tail_50.txt
+          touch reports/docker_ps.txt
+          
+          echo "## 📊 CI Check Results" > reports/ci_summary.txt
           echo "- **Flake8 Check**: ${{ steps.flake8_check.outputs.has_flake8_errors == 'true' && '❌ Có lỗi' || '✅ Passed' }}" >> reports/ci_summary.txt
           echo "- **Docker Build**: ${{ steps.docker_build.outcome == 'success' && '✅ Success' || '❌ Failed' }}" >> reports/ci_summary.txt
           echo "- **Log Odoo**: ${{ steps.health_check.outputs.has_log_errors == 'true' && '❌ Có lỗi' || '✅ Clean' }}" >> reports/ci_summary.txt
           echo "- **Service Check**: ${{ steps.service_check.outputs.service_available == 'true' && '✅ OK' || '❌ Không phản hồi' }}" >> reports/ci_summary.txt
+
       - name: 📧 Gửi email kết quả CI
         if: always()
         uses: dawidd6/action-send-mail@v3
+        continue-on-error: true  # Không fail job nếu email không gửi được
         with:
           server_address: smtp.gmail.com
           server_port: 465
@@ -125,17 +168,24 @@ jobs:
           from: "Odoo CI Bot <${{ secrets.SMTP_USERNAME }}>"
           body: |
             Kính gửi Leader,
+            
             CI đã chạy trên PR #${{ github.event.number }}: "${{ github.event.pull_request.title }}"
+            
+            **Thông tin PR:**
             - Tác giả: ${{ github.event.pull_request.user.login }}
             - Branch: ${{ github.head_ref }} → develop
             - Commit: ${{ github.sha }}
+            
             **Kết quả tổng hợp:**
             - Flake8: ${{ steps.flake8_check.outputs.has_flake8_errors == 'true' && '❌ Có lỗi' || '✅ Passed' }}
             - Docker Build: ${{ steps.docker_build.outcome == 'success' && '✅ Success' || '❌ Failed' }}
             - Log Odoo: ${{ steps.health_check.outputs.has_log_errors == 'true' && '❌ Có lỗi' || '✅ Clean' }}
             - Odoo Service: ${{ steps.service_check.outputs.service_available == 'true' && '✅ OK' || '❌ Không phản hồi' }}
+            
             ${{ job.status != 'success' && '⚠️ Vui lòng kiểm tra và sửa lỗi trước khi merge.' || '🚀 Sẵn sàng merge!' }}
-            Link PR: ${{ github.event.pull_request.html_url }}
+            
+            **Link PR:** ${{ github.event.pull_request.html_url }}
+            
             Trân trọng,  
             Odoo CI Bot 🤖
           attachments: reports/flake8_errors.txt,reports/log_errors.txt,reports/odoo_tail_50.txt,reports/ci_summary.txt,reports/docker_ps.txt
