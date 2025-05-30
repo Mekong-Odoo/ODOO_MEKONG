@@ -242,4 +242,3 @@ else
     fi
 fi
 
-# Test WF
