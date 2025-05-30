@@ -5,6 +5,11 @@ on:
     branches: [develop]
     types: [opened, synchronize, reopened]
 
+# Prevent concurrent runs on same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check_odoo:
     runs-on: ubuntu-latest
@@ -14,8 +19,8 @@ jobs:
       - name: 📥 Lấy source code
         uses: actions/checkout@v4
 
-      # Cache Python dependencies để tránh cài lại
-      - name: 🐍 Cài Python 3.12 với cache
+      # Cache với key stable hơn
+      - name: 🐍 Setup Python 3.12 với pip cache
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
@@ -24,16 +29,25 @@ jobs:
       - name: 📁 Tạo thư mục reports
         run: mkdir -p reports
 
-      # Cache apt packages
-      - name: 📦 Cache apt packages
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: python3-pip postgresql-client
-          version: 1.0
-
-      - name: 📦 Cài Python dependencies với cache
+      # Simplified apt installation - không cache apt
+      - name: 📦 Cài system dependencies
         run: |
-          pip install --cache-dir ~/.cache/pip flake8 pylint
+          sudo apt-get update -qq
+          sudo apt-get install -y python3-pip postgresql-client
+
+      # Cache pip với hash của workflow này
+      - name: 📦 Cache Python packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('.github/workflows/ci_check.yml') }}-v1
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: 📦 Cài Python dependencies
+        run: |
+          pip install --no-deps flake8 pylint
+          echo "✅ Python packages installed"
 
       - name: 🧪 Chạy flake8 kiểm tra code (addons + custom_modules)
         id: flake8_check
@@ -62,26 +76,22 @@ jobs:
           FILESTORE_PATH=${{ secrets.FILESTORE_PATH }}
           EOF
 
-      # Cache Docker Compose binary
-      - name: 🔧 Cache và cài Docker Compose
-        id: docker-compose-cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.docker/cli-plugins/docker-compose
-          key: docker-compose-v2.27.1
-
-      - name: 🔧 Cài Docker Compose nếu chưa có cache
-        if: steps.docker-compose-cache.outputs.cache-hit != 'true'
+      # Docker Compose - simple approach
+      - name: 🔧 Setup Docker Compose
         run: |
-          DOCKER_COMPOSE_VERSION="v2.27.1"
-          mkdir -p ~/.docker/cli-plugins
-          curl -SL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-          chmod +x ~/.docker/cli-plugins/docker-compose
-
-      - name: 🧪 Kiểm tra Docker Compose
-        run: |
-          chmod +x ~/.docker/cli-plugins/docker-compose
-          ~/.docker/cli-plugins/docker-compose version
+          # Check if already exists
+          if [ -f ~/.docker/cli-plugins/docker-compose ]; then
+            echo "✅ Docker Compose already exists"
+            ~/.docker/cli-plugins/docker-compose version
+          else
+            echo "📥 Installing Docker Compose v2.27.1..."
+            DOCKER_COMPOSE_VERSION="v2.27.1" 
+            mkdir -p ~/.docker/cli-plugins
+            curl -SL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64" -o ~/.docker/cli-plugins/docker-compose
+            chmod +x ~/.docker/cli-plugins/docker-compose
+            echo "✅ Docker Compose installed"
+            ~/.docker/cli-plugins/docker-compose version
+          fi
 
       # Cache Docker layers
       - name: 🐳 Setup Docker Buildx với cache
@@ -150,54 +160,92 @@ jobs:
           cd server
           service_available=false
           
+          # Tạo debug info file trước (luôn có file này)
+          echo "=== ODOO SERVICE DEBUG INFO ===" > ../reports/debug_info.txt
+          echo "Timestamp: $(date)" >> ../reports/debug_info.txt
+          echo "Runner: GitHub Actions Ubuntu" >> ../reports/debug_info.txt
+          echo "" >> ../reports/debug_info.txt
+          
           echo "🔍 Phương pháp 1: Kiểm tra container health"
+          echo "=== Container Status ===" >> ../reports/debug_info.txt
+          ~/.docker/cli-plugins/docker-compose ps >> ../reports/debug_info.txt 2>&1 || true
           if ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Up.*healthy\|odoo_app.*Up" && ! ~/.docker/cli-plugins/docker-compose ps | grep -q "odoo_app.*Exit"; then
             echo "✅ Container đang chạy bình thường"
+            echo "✅ Container health: OK" >> ../reports/debug_info.txt
             service_available=true
+          else
+            echo "❌ Container không healthy"
+            echo "❌ Container health: FAILED" >> ../reports/debug_info.txt
           fi
+          
+          echo "" >> ../reports/debug_info.txt
+          echo "=== Port Status ===" >> ../reports/debug_info.txt
+          ss -tulpn | grep 8069 >> ../reports/debug_info.txt 2>&1 || echo "Port 8069 not found" >> ../reports/debug_info.txt
           
           echo "🔍 Phương pháp 2: Kiểm tra port binding"
           if ss -tulpn | grep -q ":8069"; then
             echo "✅ Port 8069 đang được bind"
+            echo "✅ Port binding: OK" >> ../reports/debug_info.txt
             service_available=true
+          else
+            echo "❌ Port 8069 không được bind"
+            echo "❌ Port binding: FAILED" >> ../reports/debug_info.txt
           fi
           
+          echo "" >> ../reports/debug_info.txt
+          echo "=== Process Check ===" >> ../reports/debug_info.txt
           echo "🔍 Phương pháp 3: Kiểm tra process Odoo trong container"
-          if ~/.docker/cli-plugins/docker-compose exec -T odoo_app pgrep -f "odoo" > /dev/null 2>&1; then
+          if ~/.docker/cli-plugins/docker-compose exec -T odoo_app pgrep -f "odoo" >> ../reports/debug_info.txt 2>&1; then
             echo "✅ Process Odoo đang chạy trong container"
+            echo "✅ Odoo process: RUNNING" >> ../reports/debug_info.txt
             service_available=true
+          else
+            echo "❌ Process Odoo không chạy trong container"
+            echo "❌ Odoo process: NOT FOUND" >> ../reports/debug_info.txt
           fi
           
+          echo "" >> ../reports/debug_info.txt
+          echo "=== HTTP Check ===" >> ../reports/debug_info.txt
           echo "🔍 Phương pháp 4: Kiểm tra HTTP (fallback)"
           for i in {1..3}; do
             if curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/web/health > /dev/null 2>&1; then
               echo "✅ HTTP health check thành công"
+              echo "✅ HTTP /web/health: OK (attempt $i)" >> ../reports/debug_info.txt
               service_available=true
               break
             elif curl -sSf --connect-timeout 10 --max-time 30 http://localhost:8069/ > /dev/null 2>&1; then
               echo "✅ HTTP root check thành công"
+              echo "✅ HTTP /: OK (attempt $i)" >> ../reports/debug_info.txt
               service_available=true
               break
+            else
+              echo "❌ HTTP attempt $i failed" >> ../reports/debug_info.txt
             fi
             echo "⏳ HTTP thử lại lần $i..."
             sleep 20
           done
           
+          echo "" >> ../reports/debug_info.txt
+          echo "=== Container Logs (Last 30 lines) ===" >> ../reports/debug_info.txt
+          ~/.docker/cli-plugins/docker-compose logs --tail 30 odoo_app >> ../reports/debug_info.txt 2>&1 || echo "Could not get container logs" >> ../reports/debug_info.txt
+          
+          echo "" >> ../reports/debug_info.txt
+          echo "=== System Resources ===" >> ../reports/debug_info.txt
+          echo "Memory usage:" >> ../reports/debug_info.txt
+          free -h >> ../reports/debug_info.txt 2>&1 || true
+          echo "Disk usage:" >> ../reports/debug_info.txt
+          df -h >> ../reports/debug_info.txt 2>&1 || true
+          
           if [ "$service_available" = true ]; then
             echo "service_available=true" >> $GITHUB_OUTPUT
             echo "✅ Odoo service kiểm tra thành công"
+            echo "" >> ../reports/debug_info.txt
+            echo "🎉 FINAL RESULT: SERVICE AVAILABLE" >> ../reports/debug_info.txt
           else
             echo "service_available=false" >> $GITHUB_OUTPUT
             echo "❌ Odoo service không phản hồi qua tất cả phương pháp"
-            
-            # Thu thập thêm thông tin debug
-            echo "=== DEBUG INFO ===" > ../reports/debug_info.txt
-            echo "Container status:" >> ../reports/debug_info.txt
-            ~/.docker/cli-plugins/docker-compose ps >> ../reports/debug_info.txt 2>&1 || true
-            echo -e "\nPort status:" >> ../reports/debug_info.txt
-            ss -tulpn | grep 8069 >> ../reports/debug_info.txt 2>&1 || echo "Port 8069 not found" >> ../reports/debug_info.txt
-            echo -e "\nContainer logs (last 20 lines):" >> ../reports/debug_info.txt
-            ~/.docker/cli-plugins/docker-compose logs --tail 20 odoo_app >> ../reports/debug_info.txt 2>&1 || true
+            echo "" >> ../reports/debug_info.txt
+            echo "❌ FINAL RESULT: SERVICE NOT AVAILABLE" >> ../reports/debug_info.txt
           fi
 
       - name: 🧹 Cleanup Docker
@@ -254,16 +302,16 @@ jobs:
             🔍 CI Report cho PR #${{ github.event.number }}: "${{ github.event.pull_request.title }}"
             
             **📋 Thông tin PR:**
-            - 👤 Tác giả: ${{ github.event.pull_request.user.login }}
-            - 🌿 Branch: ${{ github.head_ref }} → develop
-            - 📝 Commit: ${{ github.sha }}
-            - 🕐 Thời gian: $(date)
+            - Tác giả: ${{ github.event.pull_request.user.login }}
+            - Branch: ${{ github.head_ref }} → develop
+            - Commit: ${{ github.sha }}
+            - Thời gian: $(date)
             
             **📊 Kết quả chi tiết:**
-            - 🎨 Flake8: ${{ steps.flake8_check.outputs.has_flake8_errors == 'true' && '❌ Có lỗi code style' || '✅ Code style OK' }}
-            - 🐳 Docker Build: ${{ steps.docker_build.outcome == 'success' && '✅ Build thành công' || '❌ Build thất bại' }}
-            - 📋 Odoo Logs: ${{ steps.health_check.outputs.has_log_errors == 'true' && '❌ Có lỗi trong logs' || '✅ Logs sạch' }}
-            - 🌐 Service: ${{ steps.service_check.outputs.service_available == 'true' && '✅ Service hoạt động' || '⚠️ Service không phản hồi (có thể do network)' }}
+            - Flake8: ${{ steps.flake8_check.outputs.has_flake8_errors == 'true' && '❌ Có lỗi code style' || '✅ Code style OK' }}
+            - Docker Build: ${{ steps.docker_build.outcome == 'success' && '✅ Build thành công' || '❌ Build thất bại' }}
+            - Odoo Logs: ${{ steps.health_check.outputs.has_log_errors == 'true' && '❌ Có lỗi trong logs' || '✅ Logs sạch' }}
+            - Service: ${{ steps.service_check.outputs.service_available == 'true' && '✅ Service hoạt động' || '⚠️ Service không phản hồi (có thể do network)' }}
             
             ${{ job.status != 'success' && '⚠️ **Cần xem xét:** Vui lòng kiểm tra các file đính kèm để biết chi tiết lỗi.' || '🚀 **Sẵn sàng merge!** Tất cả kiểm tra đã pass.' }}
             
